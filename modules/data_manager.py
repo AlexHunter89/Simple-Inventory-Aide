@@ -6,9 +6,9 @@ from pathlib import Path
 from rich import print
 from rich.markup import escape
 
-inventory_data_file_path = Path(r"C:\Users\alexj\Documents\GitHub\forman-mills-inventory-aide\data\inventory.xlsx")
-log_file_path = Path(r"C:\Users\alexj\Documents\GitHub\forman-mills-inventory-aide\data\entry_log.xlsx")
-bin_variable_file_path = Path(r"C:\Users\alexj\Documents\GitHub\forman-mills-inventory-aide\data\bin_variable.txt")
+inventory_data_file_path = Path(r"data\inventory.xlsx")
+log_file_path = Path(r"data\entry_log.xlsx")
+bin_variable_file_path = Path(r"data\bin_variable.txt")
 
 def start_new_inventory_session():    
         columns = ['DateTime', 'Description', 'Quantity', 'UPC', 'Price', 'User', 'Bin']
