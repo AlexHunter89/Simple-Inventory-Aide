@@ -3,6 +3,7 @@ from rich import print
 from rich.markup import escape
 
 def greet_and_identify_user():
+    """Greets the user. Asks them for their name and employee number. Does not validate user information. Employee number must be in integer. Returns an 'identity'."""
     print("\nWelcome to the inventory tracking system.\n")
     user_name_prompt = "Please enter your name: "
     user_name = pyip.inputStr(prompt=user_name_prompt)
