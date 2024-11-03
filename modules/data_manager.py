@@ -94,7 +94,7 @@ def bin_changer():
     return None
 
 def bin_reset():
-    """Resets the bin_variable.txt file to '1'. Creates the file automatically if it doesn't already exist."""
+    """Resets the bin_variable.txt file to '1'. Creates the file automatically if it doesn't already exist. Returns the bin variable."""
     bin_variable = '1'
     bin_variable_file = open(bin_variable_file_path, 'w')
     bin_variable_file.write(bin_variable)
