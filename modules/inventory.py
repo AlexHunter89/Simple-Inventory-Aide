@@ -2,7 +2,6 @@ import pyinputplus as pyip
 from datetime import datetime
 from modules.data_manager import auto_save
 from rich import print
-from rich.markup import escape
 
 def get_upc():
     while True:
