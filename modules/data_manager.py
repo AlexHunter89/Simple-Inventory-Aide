@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-from datetime import datetime
 import pyinputplus as pyip
 from pathlib import Path
 from rich import print
