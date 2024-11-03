@@ -65,6 +65,9 @@ def save_inventory_log(df):
     return None
 
 def bin_variable_file_handler():
+    """Checks to see if a file bin_variable.txt exist.
+    If it does, it will read the file and use what is read as the bin variable.
+    If it does not, it will create the file and set the bin variable to default '1'."""
     if os.path.exists(bin_variable_file_path):
         bin_variable_file = open(bin_variable_file_path)
         bin_variable = bin_variable_file.read()
