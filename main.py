@@ -39,9 +39,13 @@ def main():
 
                 # If the password is correct it starts a fresh session
                 print("\n[green]*New Session Started*[/green]")
+
+                # Creates a new DataFrame
                 df = start_new_inventory_session()
-                bin_reset()
-                current_bin = bin_variable_file_handler()
+
+                # Resets the bin and returns the variable
+                current_bin = bin_reset()
+                
                 while True:
                     upc = str(get_upc())
                     if upc != '':
