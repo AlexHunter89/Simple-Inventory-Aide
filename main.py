@@ -11,7 +11,6 @@ def main():
     user_identity = greet_and_identify_user()
 
     # This will check to see if there is a bin variable text file
-    # If it does not exist it will create one and set the bin to '1'
     # It displays the bin that was loaded or created
     current_bin = bin_variable_file_handler()
     print(f"The current bin is: {escape(current_bin)}")
@@ -45,7 +44,7 @@ def main():
 
                 # Resets the bin and returns the variable
                 current_bin = bin_reset()
-                
+
                 while True:
                     upc = str(get_upc())
                     if upc != '':
