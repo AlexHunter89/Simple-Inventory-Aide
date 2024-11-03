@@ -50,6 +50,8 @@ def main():
 
                     # Gets a UPC from the user. Converts it to a string with str() for parsing
                     upc = str(get_upc())
+
+                    # If the user enters a valid UPC
                     if upc != '':
                         description, price = get_existing_upc_data(upc, df)                        
                         if description == None:
