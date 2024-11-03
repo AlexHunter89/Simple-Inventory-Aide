@@ -10,30 +10,35 @@ def main():
     # This greets the user and ask for their identity
     user_identity = greet_and_identify_user()
 
-    # This will check to see if there is a bin variable text file.
-    # If it does not exist it will create one and set the bin to '1'.
-    # It displays the bin that was loaded or created.
+    # This will check to see if there is a bin variable text file
+    # If it does not exist it will create one and set the bin to '1'
+    # It displays the bin that was loaded or created
     current_bin = bin_variable_file_handler()
     print(f"The current bin is: {escape(current_bin)}")
 
     # Main loop to continue to display menu
     while True:
-        # Prints user information and displays the menu.
+
+        # Prints user information and displays the menu
         print(f"Current User: [blue]{escape(user_identity)}[/blue]")
         user_menu_entry = display_menu()
 
-        # One of the user choices.
+        # If the user wants to start a new session
         if user_menu_entry == 'Start New Session (Not Recommended)':
+
+            # Sends a warning to the user
             user_new_session_warning_response = warn_user_new_session()
             if user_new_session_warning_response == 'yes':
+                # Request a password
                 password_result = get_admin_password()
+
+                # If the password is incorrect it prints a message and goes back to main menu
                 if not password_result:
-                    print()
-                    print("[bold red]Access Denied[/bold red]")
-                    print()
+                    print("\n[bold red]Access Denied[/bold red]\n")
                     continue
-                print()
-                print("[green]*New Session Started*[/green]")
+
+                # If the password is correct it starts a fresh session
+                print("\n[green]*New Session Started*[/green]")
                 df = start_new_inventory_session()
                 bin_reset()
                 current_bin = bin_variable_file_handler()
