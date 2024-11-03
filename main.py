@@ -1,9 +1,7 @@
 from modules.user import feature_coming_soon, greet_and_identify_user, warn_user_new_session, user_change_bin, get_admin_password
 from modules.menu import display_menu
-from modules.inventory import item_found_sequence, item_not_found_sequence, get_upc, get_item_details, get_existing_upc_data, get_quantity, add_item
-from modules.data_manager import auto_save, start_new_inventory_session, save_entry_log, load_inventory_session, save_inventory_log, bin_variable_file_handler, bin_changer, bin_reset
-import pandas as pd
-from datetime import datetime
+from modules.inventory import item_found_sequence, item_not_found_sequence, get_upc, get_existing_upc_data
+from modules.data_manager import start_new_inventory_session, save_entry_log, load_inventory_session, save_inventory_log, bin_variable_file_handler, bin_changer, bin_reset
 import sys
 from rich import print
 from rich.markup import escape
