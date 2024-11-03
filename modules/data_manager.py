@@ -94,11 +94,12 @@ def bin_changer():
     return None
 
 def bin_reset():
+    """Resets the bin_variable.txt file to '1'. Creates the file automatically if it doesn't already exist."""
     bin_variable = '1'
     bin_variable_file = open(bin_variable_file_path, 'w')
     bin_variable_file.write(bin_variable)
     bin_variable_file.close()
-    return None
+    return bin_variable
 
 def auto_save(df):
     if (len(df) % 5) == 0:
