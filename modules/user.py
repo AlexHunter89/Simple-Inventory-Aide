@@ -3,9 +3,9 @@ from rich import print
 from rich.markup import escape
 
 def greet_and_identify_user():
-    print()
-    print("Welcome to the inventory tracking system.")
-    print()
+    #print()
+    print("\nWelcome to the inventory tracking system.\n")
+    #print()
     user_name_prompt = "Please enter your name: "
     user_name = pyip.inputStr(prompt=user_name_prompt)
     employee_number_prompt = "Please enter your employee number:"
