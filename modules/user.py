@@ -14,6 +14,10 @@ def greet_and_identify_user():
     return employee_identity
 
 def warn_user_new_session():
+    """Warns the user about the data overwrite that will occur when starting a new session.
+    Ask them to confirm their action. Finally, it ask for a password.
+    If the password is invalid it will send user back to the main menu.
+    This action should be reserved to administrators."""
     new_session_overwrite_warning = "\n[bold red]WARNING![/bold red] Starting a new session will overwrite any previous sessions.\n"
     user_continuation_prompt = "Are you sure you want to continue? (yes/no): "
     print(new_session_overwrite_warning)
