@@ -45,7 +45,10 @@ def main():
                 # Resets the bin and returns the variable
                 current_bin = bin_reset()
 
+                # Loop to ask user to enter UPCs until they exit
                 while True:
+
+                    # Gets a UPC from the user. Converts it to a string with str() for parsing
                     upc = str(get_upc())
                     if upc != '':
                         description, price = get_existing_upc_data(upc, df)                        
