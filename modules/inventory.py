@@ -4,10 +4,10 @@ from modules.data_manager import auto_save
 from rich import print
 
 def get_upc():
+    """Ask the user to enter a UPC number. Checks an integer and length of 12 digits (This is standard UPC length).
+    Invalid entries will prompt the user to try again. An empty entry will be allowed so that the user can go back to the main menu."""
     while True:
-        """Prompt the user to enter a UPC code."""
-        upc_entry_prompt = "Please enter a UPC code (Or press Enter to save and return to the Main Menu): "
-        print()
+        upc_entry_prompt = "\nPlease enter a UPC code (Or press Enter to save and return to the Main Menu): "
         upc = pyip.inputNum(prompt=upc_entry_prompt, blank=True)
         if upc == '':
             break
