@@ -122,3 +122,32 @@ def get_user_upc_input():
     upc_entry_prompt = "\nPlease enter a UPC code (Or press Enter to save and return to the Main Menu): "
     upc = pyip.inputNum(prompt=upc_entry_prompt, blank=True)
     return str(upc)
+
+def get_item_details():
+    """
+    Prompt the user for item description and price.
+    
+    Returns:
+        tuple: (description, price) provided by the user. The description is a non-empty string,
+        and the price is a positive number.
+        
+    Raises:
+        ValueError: If the price entered is not a positive number.
+    """    
+    description_entry_prompt = "Please enter the item description (or press Enter to cancel): " # Prompt for description
+    description = pyip.inputStr(prompt=description_entry_prompt)
+    
+    if description.strip() == '':
+        print("No description entered. Cancelling item entry.")
+        return None, None  # Return to indicate no valid item was added.
+    
+    while True: # Prompt for price
+        price_entry_prompt = "Please enter the item price (must be positive): "
+        price = pyip.inputNum(prompt=price_entry_prompt)
+        
+        if price > 0:
+            break
+        else:
+            print("Invalid price. Price must be greater than zero. Please try again.")
+
+    return description, price
