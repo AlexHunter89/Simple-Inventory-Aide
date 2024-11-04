@@ -33,49 +33,22 @@ def main():
                 while True:
                     # Gets a UPC from the user. Converts it to a string with str() for parsing
                     upc = get_upc(df, user_identity, current_bin)
+                    # If the UPC is a blank entry the user will return to the main menu
                     if upc == '':
                         break
-
-                    """# If the user enters a valid UPC
-                    if upc != '':
-                        description, price = get_existing_upc_data(upc, df)      
-
-                        if description == None:
-                            item_not_found_sequence(df, upc, user_identity, current_bin)
-
-                        else:
-                            item_found_sequence(df, description, upc, price, user_identity, current_bin)
-
-                    else:
-                        save_entry_log(df)
-                        save_inventory_log(df)
-                        break"""
-
             else:
                 continue
 
         elif user_menu_entry == 'Load Previous Session (Recommended)':
-            print("\n[green]*Previous Session Loaded*[/green]")
+            # Loads the previous Excel file to continue work
             df = load_inventory_session()
 
             while True:
-                    upc = str(get_upc())
-
-                    if upc != '':
-                        description, price = get_existing_upc_data(upc, df)    
-
-                        if description == None:
-                            item_not_found_sequence(df, upc, user_identity, current_bin)
-
-                        else:
-                            item_found_sequence(df, description, upc, price, user_identity, current_bin)
-
-                    else:
-                        save_entry_log(df)
-                        save_inventory_log(df)
-                        break
-            else:
-                continue
+                # Gets a UPC from the user. Converts it to a string with str() for parsing
+                upc = str(get_upc(df, user_identity, current_bin))
+                # If the UPC is a blank entry the user will return to the main menu
+                if upc == '':
+                    break
 
         elif user_menu_entry == 'Delete Entry':
             feature_coming_soon()
