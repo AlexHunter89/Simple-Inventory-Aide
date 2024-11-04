@@ -68,7 +68,7 @@ def new_session_warning_sequence():
     print()
 
     if user_continuation_response == 'no':
-        print("[yellow]New session canceled. Returning to the main menu.[/yellow]")
+        print("[yellow]New session canceled. Returning to the main menu.[/yellow]\n")
         return False
     
     new_session_overwrite_warning_2 = "\nPlease note that continuing will overwrite any previous data.\n"
