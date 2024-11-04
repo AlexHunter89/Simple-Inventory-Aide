@@ -1,5 +1,15 @@
 # Inventory Tracking System
 
+## Update: Major Refactoring in Progress
+
+Hello, everyone! I wanted to share a quick update regarding some ongoing improvements to the project.
+
+I am currently conducting a significant refactoring of the code base to improve readability and maintainability. As part of this process, I’m also adding docstrings across the code to facilitate easier collaboration and understanding for anyone interested in contributing.
+
+However, please be aware that during this overhaul, the DataFrame functionality is temporarily impacted, particularly with recognizing preexisting UPCs in the database. I’m actively working to resolve these issues as part of the overall refactoring and bug-squashing effort. I expect to have everything back in working order within the next day or two.
+
+Thank you for your patience, and stay tuned for updates!
+
 ## Overview
 
 This Inventory Tracking System is a command-line Python application designed to manage inventory by scanning or manually entering UPC (Universal Product Code) numbers. The program helps users track item descriptions, prices, and quantities. If an item is already present in the inventory, the user can simply update the quantity. If the item is new, the system will prompt the user to provide additional details, such as a description and price. This software is perfect for small-scale inventory management where simple text-based tracking is sufficient.
