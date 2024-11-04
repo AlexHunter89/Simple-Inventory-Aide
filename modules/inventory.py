@@ -20,24 +20,40 @@ def validate_upc(upc):
     return True
 
 def get_upc(df, user_identity, current_bin):
-    """Ask the user to enter a UPC number. Checks an integer and length of 12 digits (This is standard UPC length).
-    Invalid entries will prompt the user to try again. An empty entry will be allowed so that the user can go back to the main menu."""
-    while True:
-        upc_entry_prompt = "\nPlease enter a UPC code (Or press Enter to save and return to the Main Menu): "
-        upc = pyip.inputNum(prompt=upc_entry_prompt, blank=True)
-        if upc == '':
-            break
-        elif len(str(upc)) != 12:
-            print("Invalid UPC length.")
-            continue
-        else:
-            description, price = get_existing_upc_data(upc, df)
-            if description == None:
-                item_not_found_sequence(df, upc, user_identity, current_bin)
-            else:
-                item_found_sequence(df, description, upc, price, user_identity, current_bin)
+    """
+    Asks the user to enter a UPC number and handles validation and subsequent item lookups.
     
-    return (upc, df)
+    Args:
+        df (DataFrame): The inventory DataFrame.
+        user_identity (str): The identity of the user performing the operation.
+        current_bin (str): The identifier for the current inventory bin.
+        
+    Returns:
+        tuple: The UPC code (str) and the updated DataFrame.
+    """
+    while True:
+        upc = get_user_upc_input()  # Step 1: Get the UPC from the user
+
+        if upc == '':   # Step 2: Check if the user wants to return to the main menu
+            break   # Return to main menu
+
+        if not validate_upc(upc):   # Step 3: Validate the UPC length
+            continue    # Invalid UPC, ask again
+
+        description, price = get_existing_upc_data(upc, df) # Step 4: Look up the item in the inventory
+
+        if description is None:
+            # Item not found, call the appropriate sequence
+            item_not_found_sequence(df, upc, user_identity, current_bin)
+        else:
+            # Item found, call the appropriate sequence
+            item_found_sequence(df, description, upc, price, user_identity, current_bin)
+        
+        # Since we either find an item or not, we should break after the first valid UPC check
+        return upc, df
+
+    # If the loop ends without finding an item or breaking for valid reasons, return an empty UPC and df
+    return '', df
 
 def get_item_details():
     """Prompt the user for item description and price."""
@@ -48,14 +64,35 @@ def get_item_details():
     return (description, price)
 
 def get_existing_upc_data(upc, df):
-    matches = df[df['UPC'] == str(upc)]
-    if not matches.empty:
-        previous_entry = matches.iloc[0]
-        description = previous_entry['Description']
-        price = previous_entry['Price']
-        return (description, price)
-    else:
-        return (None, None)
+    """
+    Searches for an existing UPC in the inventory DataFrame and retrieves its details.
+    
+    Args:
+        upc (str): The UPC code to search for.
+        df (DataFrame): The inventory DataFrame containing product information.
+        
+    Returns:
+        tuple: (description, price) if found, otherwise (None, None).
+    """
+    try:
+        matches = df[df['UPC'] == str(upc)] # Ensure UPC is treated as a string for matching consistency
+        
+        if not matches.empty:   # Check if there are any matches
+            # Extract the first matching entry
+            previous_entry = matches.iloc[0]
+            description = previous_entry['Description']
+            price = previous_entry['Price']
+            return (description, price)
+        
+        return (None, None) # No match found
+    except KeyError as e:
+        # Handle case where 'UPC', 'Description', or 'Price' columns are missing
+        print(f"Error: Missing column in DataFrame: {e}")
+        return None, None
+    except Exception as e:
+        # General catch for any unexpected issues
+        print(f"An unexpected error occurred: {e}")
+        return None, None
     
 def get_quantity():
     """Prompt the user for quantity of items."""
