@@ -26,6 +26,7 @@ except ImportError:
 inventory_data_file_path = Path(r"data\inventory.xlsx")
 log_file_path = Path(r"data\entry_log.xlsx")
 bin_variable_file_path = Path(r"data\bin_variable.txt")
+password_file_path = Path(r"data\admin.txt")
 
 def bin_variable_file_handler():
     """
@@ -46,6 +47,14 @@ def bin_variable_file_handler():
         with open(bin_variable_file_path, 'w') as bin_variable_file:
             bin_variable_file.write(bin_variable)
         return bin_variable
+
+def read_password_from_file():
+    try:
+        with open(password_file_path, 'r') as file:
+            return file.read().strip()
+    except FileNotFoundError:
+        print(f"[red]Error: Password file '{password_file_path}' not found.[/red]")
+        return None
 
 def start_new_inventory_session():
         """Creates an empty DataFrame with appropriate column names."""
