@@ -19,7 +19,7 @@ def main():
 
         # Prints user information and displays the menu
         #print(f"Current User: [blue]{escape(user_identity)}[/blue]")
-        user_menu_entry = display_menu(user_identity)
+        user_menu_entry = display_menu(user_identity, current_bin)
 
         # If the user wants to start a new session
         if user_menu_entry == 'Start New Session (Not Recommended)':
