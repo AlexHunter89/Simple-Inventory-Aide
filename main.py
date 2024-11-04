@@ -13,7 +13,7 @@ def main():
     # It displays the bin that was loaded or created
     current_bin = bin_variable_file_handler()
 
-    # Main loop to continue to display menu
+    # Main loop
     while True:
         # Prints user information and displays the menu
         user_menu_entry = display_menu(user_identity, current_bin)
@@ -24,16 +24,19 @@ def main():
             user_new_session_warning_response = new_session_warning_sequence()
 
             if user_new_session_warning_response:
+                # If the user confirms a new session
+                # This creates a new emtpy DataFrame
                 df = start_new_inventory_session()
+                # Resets the bin variable to default '1'
                 current_bin = bin_reset()
 
                 while True:
-                    df = start_new_inventory_session()
-                    current_bin = bin_reset()
                     # Gets a UPC from the user. Converts it to a string with str() for parsing
-                    upc = str(get_upc())
+                    upc = get_upc(df, user_identity, current_bin)
+                    if upc == '':
+                        break
 
-                    # If the user enters a valid UPC
+                    """# If the user enters a valid UPC
                     if upc != '':
                         description, price = get_existing_upc_data(upc, df)      
 
@@ -46,7 +49,7 @@ def main():
                     else:
                         save_entry_log(df)
                         save_inventory_log(df)
-                        break
+                        break"""
 
             else:
                 continue
@@ -92,7 +95,7 @@ def main():
 
             else:
                 continue
-            
+
         elif user_menu_entry == 'Exit':
             print("\nThank you for using the Inventory System...")
             sys.exit()

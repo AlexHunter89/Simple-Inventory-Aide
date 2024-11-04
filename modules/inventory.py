@@ -1,9 +1,9 @@
 import pyinputplus as pyip
 from datetime import datetime
-from modules.data_manager import auto_save
+from modules.data_manager import auto_save, save_entry_log, save_inventory_log
 from rich import print
 
-def get_upc():
+def get_upc(df, user_identity, current_bin):
     """Ask the user to enter a UPC number. Checks an integer and length of 12 digits (This is standard UPC length).
     Invalid entries will prompt the user to try again. An empty entry will be allowed so that the user can go back to the main menu."""
     while True:
@@ -11,11 +11,17 @@ def get_upc():
         upc = pyip.inputNum(prompt=upc_entry_prompt, blank=True)
         if upc == '':
             break
-        elif len(str(upc)) == 12:
-            break
-        else:
+        elif len(str(upc)) != 12:
             print("Invalid UPC length.")
             continue
+        else:
+            description, price = get_existing_upc_data(upc, df)
+            if description == None:
+                item_not_found_sequence(df, upc, user_identity, current_bin)
+            else:
+                item_found_sequence(df, description, upc, price, user_identity, current_bin)
+    save_entry_log(df)
+    save_inventory_log(df)
     return upc
 
 def get_item_details():
