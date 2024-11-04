@@ -20,9 +20,8 @@ def get_upc(df, user_identity, current_bin):
                 item_not_found_sequence(df, upc, user_identity, current_bin)
             else:
                 item_found_sequence(df, description, upc, price, user_identity, current_bin)
-    save_entry_log(df)
-    save_inventory_log(df)
-    return upc
+    
+    return (upc, df)
 
 def get_item_details():
     """Prompt the user for item description and price."""
