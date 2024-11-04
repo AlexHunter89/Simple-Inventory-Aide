@@ -1,7 +1,7 @@
 import pyinputplus as pyip
 from datetime import datetime
 from modules.data_manager import auto_save, save_entry_log, save_inventory_log
-from modules.user import get_user_upc_input
+from modules.user import get_user_upc_input, get_item_details, get_quantity
 from rich import print
 
 def validate_upc(upc):
@@ -55,14 +55,6 @@ def get_upc(df, user_identity, current_bin):
     # If the loop ends without finding an item or breaking for valid reasons, return an empty UPC and df
     return '', df
 
-def get_item_details():
-    """Prompt the user for item description and price."""
-    description_entry_prompt = "Please enter the item description: "
-    price_entry_prompt = "Please enter the item price: "
-    description = pyip.inputStr(prompt=description_entry_prompt)
-    price = pyip.inputNum(prompt=price_entry_prompt)
-    return (description, price)
-
 def get_existing_upc_data(upc, df):
     """
     Searches for an existing UPC in the inventory DataFrame and retrieves its details.
@@ -93,12 +85,6 @@ def get_existing_upc_data(upc, df):
         # General catch for any unexpected issues
         print(f"An unexpected error occurred: {e}")
         return None, None
-    
-def get_quantity():
-    """Prompt the user for quantity of items."""
-    quantity_entry_prompt = "Please enter the quantity (Can enter 0 if you don't want to update the quantity): "
-    quantity = pyip.inputNum(prompt=quantity_entry_prompt, min=0)
-    return quantity
 
 def add_item(df, date_time, description, quantity, upc, price, user_identity, current_bin):
     new_item = {
@@ -117,9 +103,13 @@ def add_item(df, date_time, description, quantity, upc, price, user_identity, cu
 def item_not_found_sequence(df,  upc, user_identity, current_bin):
     item_details_needed_prompt = "\n[yellow]Could not find item in database. Please enter the details.[/yellow]\n"
     print(item_details_needed_prompt)
-    description, price = get_item_details()
+
+    description, price = get_item_details() # Returns the items information
+
     quantity = get_quantity()
+
     date_time = datetime.now()
+
     df = add_item(df, date_time, description, quantity, upc, price, user_identity, current_bin)
     auto_save(df)
     print()
