@@ -27,8 +27,10 @@ def display_menu(user_identity, current_bin):
     Displays the main menu and prompts the user to select an action.
 
     Parameters:
-        user_identity (str): The name or identifier of the current user.
-        current_bin (str): The current active bin, which provides context for user operations.
+        user_identity (str): A concatenated string combining the user's name and employee number.
+            This is used to track the current user but is not validated against any external database.
+        current_bin (str): A label representing the current container in use (e.g., 'box 1' or 'apple box').
+            It provides context for user operations and can be customized by the user.
 
     Returns:
         str: The user's selected menu option from the available choices.
