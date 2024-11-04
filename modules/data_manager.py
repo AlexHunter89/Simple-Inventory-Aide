@@ -39,15 +39,11 @@ def load_inventory_session():
         try:
             df = pd.read_excel(log_file_path)
         except Exception as e:
-            print()
-            print(f"Error loading inventory file: {escape(e)}")
-            print()
+            print(f"\nError loading inventory file: {escape(e)}\n")
             print(new_dataframe_prompt)
             df = start_new_inventory_session()
     else:
-        print()
-        print("Could not locate the file.")
-        print()
+        print("\nCould not locate the file.\n")
         print(new_dataframe_prompt)
         df = start_new_inventory_session()
     df = dataframe_types_corrector(df)
@@ -82,15 +78,12 @@ def bin_variable_file_handler():
         return bin_variable
     
 def bin_changer():
-    print()
-    enter_bin_number_prompt = "Please enter the bin you would like to work on: "
+    enter_bin_number_prompt = "\nPlease enter the bin you would like to work on: "
     new_bin_number = pyip.inputStr(prompt=enter_bin_number_prompt)
     bin_variable_file = open(bin_variable_file_path, 'w')
     bin_variable_file.write(new_bin_number)
     bin_variable_file.close()
-    print()
-    print(f"Current bin is now set to: {new_bin_number}")
-    print()
+    print(f"\nCurrent bin is now set to: {escape(new_bin_number)}\n")
     return None
 
 def bin_reset():
@@ -105,10 +98,8 @@ def auto_save(df):
     if (len(df) % 5) == 0:
         save_entry_log(df)
         save_inventory_log(df)
-        auto_save_prompt = "[bold green]*(Autosave Complete)*[/bold green]"
-        print()
+        auto_save_prompt = "\n[bold green]*(Autosave Complete)*[/bold green]\n"
         print(auto_save_prompt)
-        print()
         return None
     else:
         return None
