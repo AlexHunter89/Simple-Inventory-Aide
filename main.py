@@ -13,7 +13,6 @@ def main():
     # This will check to see if there is a bin variable text file
     # It displays the bin that was loaded or created
     current_bin = bin_variable_file_handler()
-    print(f"The current bin is: {escape(current_bin)}")
 
     # Main loop to continue to display menu
     while True:
