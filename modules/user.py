@@ -6,9 +6,9 @@ def greet_and_identify_user():
     """Greets the user. Asks them for their name and employee number. Does not validate user information. Employee number must be in integer. Returns an 'identity'."""
     print("\nWelcome to the inventory tracking system.\n")
     user_name_prompt = "Please enter your name: "
-    user_name = pyip.inputStr(prompt=user_name_prompt)
-    employee_number_prompt = "Please enter your employee number:"
-    employee_number = pyip.inputNum(prompt=employee_number_prompt)
+    user_name = pyip.inputStr(prompt=user_name_prompt, strip=True)
+    employee_number_prompt = "Please enter your employee number: "
+    employee_number = pyip.inputNum(prompt=employee_number_prompt, strip=True)
     employee_identity = user_name + ": " + str(employee_number)
     print(f"\nWelcome: {escape(user_name)}")
     return employee_identity
