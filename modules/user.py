@@ -1,3 +1,5 @@
+from modules.data_manager import read_password_from_file
+
 try:
     import pyinputplus as pyip
 except ImportError:
@@ -40,8 +42,9 @@ def new_session_warning_sequence():
 
     This function is called when the user attempts to start a new inventory session. It first warns the 
     user that starting a new session will overwrite all previous session data. The user must confirm 
-    if they want to continue, and if confirmed, they must enter an administrator password. If the user 
-    declines or the password is incorrect, the function will not allow the new session to start.
+    if they want to continue, and if confirmed, they must enter an administrator password. The password 
+    is read from an external text file (`password.txt`). If the user declines or the password is incorrect, 
+    the function will not allow the new session to start.
 
     Parameters:
         None
@@ -49,11 +52,13 @@ def new_session_warning_sequence():
     Returns:
         bool: 
             - Returns True if the user confirms the warning and enters the correct password.
-            - Returns False if the user declines to continue or if the password is incorrect.
+            - Returns False if the user declines to continue, the password file cannot be read, or if the password is incorrect.
         
     Notes:
-        - The password for confirmation is set as 'admin' by default but should be changed to 
-          an environment variable for enhanced security in production environments.
+        - The password is read from a file named `password.txt`. Ensure this file exists and contains 
+          the correct password.
+        - For demonstration purposes, this approach is used to keep things simple, but for production use, 
+          stronger security measures should be implemented, such as using environment variables or secure vaults.
     """
     new_session_overwrite_warning = "\n[bold red]WARNING![/bold red] Starting a new session will overwrite any previous sessions.\n"
     print(new_session_overwrite_warning)
@@ -63,11 +68,17 @@ def new_session_warning_sequence():
     print()
 
     if user_continuation_response == 'no':
+        print("[yellow]New session canceled. Returning to the main menu.[/yellow]")
         return False
     
     new_session_overwrite_warning_2 = "\nPlease note that continuing will overwrite any previous data.\n"
     print(new_session_overwrite_warning_2)
-    password = 'admin'
+
+    password = read_password_from_file
+    if not password:
+        print("[red]Password could not be retrieved. Aborting action.[/red]")
+        return False
+    
     password_prompt = "Please enter the password: "
     user_password_response = pyip.inputPassword(prompt=password_prompt)
 
