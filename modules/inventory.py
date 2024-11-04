@@ -112,7 +112,7 @@ def add_item(df, date_time, description, quantity, upc, price, user_identity, cu
     new_item = construct_item(date_time, description, quantity, upc, price, user_identity, current_bin) # Step 2: Construct the new item
 
     df.loc[len(df)] = new_item  # Step 3: Add the item to the DataFrame
-    
+
     return df
 
 def construct_item(date_time, description, quantity, upc, price, user_identity, current_bin):
@@ -177,13 +177,15 @@ def item_not_found_sequence(df,  upc, user_identity, current_bin):
 
     quantity = get_quantity()   # Step 3: Gather quantity details
 
-    if quantity == 0:
+    if quantity == 0:   # Step 4: Handle zero quantity
         print("No quantity added. Returning to main menu.")
         return None # Stop further processing if quantity is zero.
 
     date_time = datetime.now()  # Step 5: Get the current timestamp
 
+    # Step 6: Add the new item to the inventory DataFrame
     df = add_item(df, date_time, description, quantity, upc, price, user_identity, current_bin)
+    
     auto_save(df)
     print()
     print(df.tail())
