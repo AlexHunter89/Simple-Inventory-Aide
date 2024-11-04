@@ -1,6 +1,17 @@
-import pyinputplus as pyip
-from rich import print
-from rich.markup import escape
+try:
+    import pyinputplus as pyip
+except ImportError:
+    print("Error: The module 'pyinputplus' is not installed.")
+    print("Please install it by running: python -m pip install pyinputplus")
+    exit(1)
+
+try:
+    from rich import print
+    from rich.markup import escape
+except ImportError:
+    print("Error: The module 'rich' is not installed.")
+    print("Please install it by running: python -m pip install rich")
+    exit(1)
 
 def display_menu(user_identity, current_bin):
     """Displays the main menu. It shows all of the available actions that the user can take.
