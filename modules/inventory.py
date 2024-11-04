@@ -101,10 +101,15 @@ def add_item(df, date_time, description, quantity, upc, price, user_identity, cu
     return df
 
 def item_not_found_sequence(df,  upc, user_identity, current_bin):
+    # Step 1: Notify the user that the item wasn't found
     item_details_needed_prompt = "\n[yellow]Could not find item in database. Please enter the details.[/yellow]\n"
     print(item_details_needed_prompt)
 
-    description, price = get_item_details() # Returns the items information
+    description, price = get_item_details() # Step 2: Gather the new item details
+
+    if description is None and price is None:
+        print("No item added. Returning to main menu.")
+        return  None # If user cancels entry, stop further processing.
 
     quantity = get_quantity()
 
