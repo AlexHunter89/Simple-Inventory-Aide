@@ -15,70 +15,84 @@ def main():
 
     # Main loop to continue to display menu
     while True:
-
         # Prints user information and displays the menu
         user_menu_entry = display_menu(user_identity, current_bin)
 
         # If the user wants to start a new session
         if user_menu_entry == 'Start New Session (Not Recommended)':
-
             # Sends a warning to the user
             user_new_session_warning_response = new_session_warning_sequence()
+
             if user_new_session_warning_response:
                 df = start_new_inventory_session()
                 current_bin = bin_reset()
+
                 while True:
                     df = start_new_inventory_session()
                     current_bin = bin_reset()
-
                     # Gets a UPC from the user. Converts it to a string with str() for parsing
                     upc = str(get_upc())
 
                     # If the user enters a valid UPC
                     if upc != '':
-                        description, price = get_existing_upc_data(upc, df)                        
+                        description, price = get_existing_upc_data(upc, df)      
+
                         if description == None:
                             item_not_found_sequence(df, upc, user_identity, current_bin)
+
                         else:
                             item_found_sequence(df, description, upc, price, user_identity, current_bin)
+
                     else:
                         save_entry_log(df)
                         save_inventory_log(df)
                         break
+
             else:
                 continue
 
         elif user_menu_entry == 'Load Previous Session (Recommended)':
             print("\n[green]*Previous Session Loaded*[/green]")
             df = load_inventory_session()
+
             while True:
                     upc = str(get_upc())
+
                     if upc != '':
-                        description, price = get_existing_upc_data(upc, df)                        
+                        description, price = get_existing_upc_data(upc, df)    
+
                         if description == None:
                             item_not_found_sequence(df, upc, user_identity, current_bin)
+
                         else:
                             item_found_sequence(df, description, upc, price, user_identity, current_bin)
+
                     else:
                         save_entry_log(df)
                         save_inventory_log(df)
                         break
             else:
                 continue
+
         elif user_menu_entry == 'Delete Entry':
             feature_coming_soon()
             continue
+
         elif user_menu_entry == 'Modify Entry':
             feature_coming_soon()
             continue
+
         elif user_menu_entry == 'Change Current Bin':
             print(f"\nCurrent Bin is: {current_bin}")
             user_change_bin_response = user_change_bin()
+
             if user_change_bin_response == 'yes':
                 bin_changer()
                 current_bin = bin_variable_file_handler()
+
             else:
                 continue
+            
         elif user_menu_entry == 'Exit':
             print("\nThank you for using the Inventory System...")
             sys.exit()
