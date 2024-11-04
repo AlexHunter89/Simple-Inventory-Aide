@@ -24,6 +24,7 @@ def new_session_warning_sequence():
         password = 'admin'
         password_prompt = "Please enter the password: "
         user_password_response = pyip.inputPassword(prompt=password_prompt)
+        print()
         if user_password_response == password:
             print("\n[green]*New Session Started*[/green]\n")
             return True
