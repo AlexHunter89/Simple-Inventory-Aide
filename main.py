@@ -8,6 +8,7 @@ from rich import print
 def main():
     user_identity = greet_and_identify_user()   # Greets user and returns their 'identity'
     current_bin = bin_variable_file_handler()   # Loads previous bin or sets to '1' and returns the 'bin_variable'
+    df = load_inventory_session()   # Load or create inventory DataFrame at the start
 
     while True: # Main loop
         user_menu_entry = display_menu(user_identity, current_bin) # Display main menu
@@ -16,10 +17,7 @@ def main():
             user_new_session_warning_response = new_session_warning_sequence()  # Sends a warning to the user
 
             if user_new_session_warning_response:
-                # If the user confirms a new session
-                # This creates a new emtpy DataFrame
-                df = start_new_inventory_session()
-                # Resets the bin variable to default '1'
+                df = start_new_inventory_session()  # Create a new inventory DataFrame, overwriting any previous data
                 current_bin = bin_reset()
 
                 while True:
