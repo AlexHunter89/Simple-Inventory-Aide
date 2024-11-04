@@ -91,8 +91,21 @@ def new_session_warning_sequence():
 
 
 def user_change_bin():
+    """
+    Prompts the user to confirm if they want to change the current bin.
+
+    This function presents a yes/no prompt to the user asking if they wish to change the current
+    bin they are working on. It returns the user's response.
+
+    Parameters:
+        None
+
+    Returns:
+        str: The user's response ('yes' or 'no') to the change bin prompt.
+    """
+    default_answer = 'no'
     change_bin_prompt = "\nWould you like to change the current bin you are working on? (yes/no): "
-    change_bin_response = pyip.inputYesNo(prompt=change_bin_prompt)
+    change_bin_response = pyip.inputYesNo(prompt=change_bin_prompt, default=default_answer)
     return change_bin_response
 
     
