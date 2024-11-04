@@ -28,6 +28,8 @@ def main():
                 df = start_new_inventory_session()
                 current_bin = bin_reset()
                 while True:
+                    df = start_new_inventory_session()
+                    current_bin = bin_reset()
 
                     # Gets a UPC from the user. Converts it to a string with str() for parsing
                     upc = str(get_upc())
@@ -47,8 +49,7 @@ def main():
                 continue
 
         elif user_menu_entry == 'Load Previous Session (Recommended)':
-            print()
-            print("[green]*Previous Session Loaded*[/green]")
+            print("\n[green]*Previous Session Loaded*[/green]")
             df = load_inventory_session()
             while True:
                     upc = str(get_upc())
@@ -71,8 +72,7 @@ def main():
             feature_coming_soon()
             continue
         elif user_menu_entry == 'Change Current Bin':
-            print()
-            print(f"Current Bin is: {current_bin}")
+            print(f"\nCurrent Bin is: {current_bin}")
             user_change_bin_response = user_change_bin()
             if user_change_bin_response == 'yes':
                 bin_changer()
@@ -80,8 +80,7 @@ def main():
             else:
                 continue
         elif user_menu_entry == 'Exit':
-            print()
-            print("Thank you for using the Inventory System...")
+            print("\nThank you for using the Inventory System...")
             sys.exit()
 
 
