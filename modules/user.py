@@ -48,17 +48,6 @@ def user_change_bin():
     change_bin_response = pyip.inputYesNo(prompt=change_bin_prompt)
     return change_bin_response
 
-def get_admin_password():
-    """Ask for a password. If the password is invalid it will send user back to the main menu."""
-    password = "admin"
-    password_prompt = "Please enter the password: "
-    user_password_response = pyip.inputPassword(prompt=password_prompt)
-    if user_password_response == password:
-        return True
-    else:
-        return False
     
 def feature_coming_soon():
-    print()
-    print("[blue]Feature coming soon![/blue]")
-    print()
+    print("\n[blue]Feature coming soon![/blue]\n")
