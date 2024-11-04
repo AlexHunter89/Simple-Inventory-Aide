@@ -30,7 +30,7 @@ def greet_and_identify_user():
     user_name = pyip.inputStr(prompt=user_name_prompt, strip=True)
     employee_number_prompt = "Please enter your employee number: "
     employee_number = pyip.inputNum(prompt=employee_number_prompt, min=0, strip=True)
-    user_identity = f"{escape(user_name)}: {escape(employee_number)}"
+    user_identity = f"{escape(user_name)}: {employee_number}"
     print(f"\nWelcome: {escape(user_name)}")
     return user_identity
 
