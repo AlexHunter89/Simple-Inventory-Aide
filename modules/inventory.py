@@ -115,10 +115,8 @@ def add_item(df, date_time, description, quantity, upc, price, user_identity, cu
     return df
 
 def item_not_found_sequence(df,  upc, user_identity, current_bin):
-    item_details_needed_prompt = "Could not find item in database. Please enter the details."
-    print()
-    print(f"[yellow]{item_details_needed_prompt}[/yellow]")
-    print()
+    item_details_needed_prompt = "\n[yellow]Could not find item in database. Please enter the details.[/yellow]\n"
+    print(item_details_needed_prompt)
     description, price = get_item_details()
     quantity = get_quantity()
     date_time = datetime.now()
