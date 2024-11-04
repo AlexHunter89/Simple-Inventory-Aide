@@ -12,10 +12,8 @@ def main():
     while True: # Main loop
         user_menu_entry = display_menu(user_identity, current_bin) # Display main menu
 
-        # If the user wants to start a new session
-        if user_menu_entry == 'Start New Session (Not Recommended)':
-            # Sends a warning to the user
-            user_new_session_warning_response = new_session_warning_sequence()
+        if user_menu_entry == 'Start New Session (Not Recommended)':            
+            user_new_session_warning_response = new_session_warning_sequence()  # Sends a warning to the user
 
             if user_new_session_warning_response:
                 # If the user confirms a new session
@@ -33,6 +31,7 @@ def main():
                         save_inventory_log(df)
                         break
             else:
+                print("[yellow]Returning to the main menu. Session was not started.[/yellow]")
                 continue
 
         elif user_menu_entry == 'Load Previous Session (Recommended)':
