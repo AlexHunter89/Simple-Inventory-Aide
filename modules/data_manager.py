@@ -49,6 +49,26 @@ def bin_variable_file_handler():
         return bin_variable
 
 def read_password_from_file():
+    """
+    Reads the administrator password from an external text file.
+
+    This function attempts to read the administrator password from a file specified by `password_file_path`. 
+    The password is returned as a string after stripping any leading or trailing whitespace. If the file 
+    cannot be found, an error message is printed, and None is returned.
+
+    Parameters:
+        None
+
+    Returns:
+        str: The password read from the file, with any extra whitespace removed.
+        None: If the file is not found or an error occurs while reading the file.
+
+    Notes:
+        - Ensure the password file (`password_file_path`) exists and is accessible.
+        - The file should contain the password in plain text, with no extra spaces or lines.
+        - For demonstration purposes, this approach is used to externalize the password; however, in production,
+          more secure storage methods should be considered.
+    """
     try:
         with open(password_file_path, 'r') as file:
             return file.read().strip()
