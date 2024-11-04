@@ -35,9 +35,26 @@ def greet_and_identify_user():
     return user_identity
 
 def new_session_warning_sequence():
-    """Warns the user about the data overwrite that will occur when starting a new session.
-    Ask them to confirm their action. If they answer yes it will ask for a password. This action should be reserved to administrators.
-    Returns False if they answer no or if the password is incorrect. Returns True if the password is correct."""
+    """
+    Warns the user about data overwrite risks when starting a new session and prompts for confirmation.
+
+    This function is called when the user attempts to start a new inventory session. It first warns the 
+    user that starting a new session will overwrite all previous session data. The user must confirm 
+    if they want to continue, and if confirmed, they must enter an administrator password. If the user 
+    declines or the password is incorrect, the function will not allow the new session to start.
+
+    Parameters:
+        None
+
+    Returns:
+        bool: 
+            - Returns True if the user confirms the warning and enters the correct password.
+            - Returns False if the user declines to continue or if the password is incorrect.
+        
+    Notes:
+        - The password for confirmation is set as 'admin' by default but should be changed to 
+          an environment variable for enhanced security in production environments.
+    """
     new_session_overwrite_warning = "\n[bold red]WARNING![/bold red] Starting a new session will overwrite any previous sessions.\n"
     user_continuation_prompt = "Are you sure you want to continue? (yes/no): "
     print(new_session_overwrite_warning)
