@@ -1,9 +1,27 @@
 import os
-import pandas as pd
-import pyinputplus as pyip
 from pathlib import Path
-from rich import print
-from rich.markup import escape
+
+try:
+    import pandas as pd
+except ImportError:
+    print("Error: The module 'pandas' is not installed.")
+    print("Please install it by running: python -m pip install pandas")
+    exit(1)
+
+try:
+    import pyinputplus as pyip
+except ImportError:
+    print("Error: The module 'pyinputplus' is not installed.")
+    print("Please install it by running: python -m pip install pyinputplus")
+    exit(1)
+
+try:
+    from rich import print
+    from rich.markup import escape
+except ImportError:
+    print("Error: The module 'rich' is not installed.")
+    print("Please install it by running: python -m pip install rich")
+    exit(1)
 
 inventory_data_file_path = Path(r"data\inventory.xlsx")
 log_file_path = Path(r"data\entry_log.xlsx")
