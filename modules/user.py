@@ -74,7 +74,7 @@ def new_session_warning_sequence():
     new_session_overwrite_warning_2 = "\nPlease note that continuing will overwrite any previous data.\n"
     print(new_session_overwrite_warning_2)
 
-    password = read_password_from_file
+    password = read_password_from_file()
     if not password:
         print("[red]Password could not be retrieved. Aborting action.[/red]")
         return False
