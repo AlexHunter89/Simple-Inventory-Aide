@@ -148,8 +148,12 @@ def bin_reset():
         - The file is safely opened in write mode using a context manager to handle automatic closure.
     """
     bin_variable = '1'
-    with open(bin_variable_file_path, 'w') as bin_variable_file:
-        bin_variable_file.write(bin_variable)
+    try:
+        with open(bin_variable_file_path, 'w') as bin_variable_file:
+            bin_variable_file.write(bin_variable)
+    except IOError as e:
+        print(f"[red]Error: Unable to write to file '{bin_variable_file_path}'. Details: {e}[/red]")
+        return None # Return None to indicate an error occurred
     return bin_variable
 
 def save_entry_log(df):

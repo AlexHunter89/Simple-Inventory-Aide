@@ -18,7 +18,7 @@ def main():
 
             if user_new_session_warning_response:
                 df = start_new_inventory_session()  # Create a new inventory DataFrame, overwriting any previous data
-                current_bin = bin_reset()
+                current_bin = bin_reset() # Resets the bin variable to the default '1'
 
                 while True:
                     # Gets a UPC from the user. Converts it to a string with str() for parsing
