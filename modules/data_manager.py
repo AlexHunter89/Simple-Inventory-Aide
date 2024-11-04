@@ -135,11 +135,30 @@ def save_entry_log(df):
 
 
 def load_inventory_session():
-    print("\n[green]*Previous Session Loaded*[/green]")
+    """
+    Loads the inventory session from an existing log file or creates a new session.
+
+    This function attempts to load an inventory session from an Excel log file. If the file cannot be 
+    found or there is an error loading it, a new inventory DataFrame is created. The resulting DataFrame 
+    is then passed through `dataframe_types_corrector` to ensure all columns are of the correct types.
+
+    Parameters:
+        None
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the inventory data, either loaded from a previous session or newly created.
+    
+    Notes:
+        - The inventory log file is expected to be in Excel format (`.xlsx`). Ensure `log_file_path` points to a valid file.
+        - If the file cannot be found or loaded, a new session will be initialized.
+    """
+    previous_dataframe_prompt = "\n[green]*Previous Session Loaded*[/green]"
     new_dataframe_prompt = "Initializing new DataFrame..."
+
     if os.path.exists(log_file_path):
         try:
             df = pd.read_excel(log_file_path)
+            print(previous_dataframe_prompt)
         except Exception as e:
             print(f"\nError loading inventory file: {escape(e)}\n")
             print(new_dataframe_prompt)
