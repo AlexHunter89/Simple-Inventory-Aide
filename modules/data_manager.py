@@ -129,6 +129,29 @@ def dataframe_types_corrector(df):
         })
     return df
 
+def bin_reset():
+    """
+    Resets the bin_variable.txt file to '1', creating the file if it does not already exist.
+
+    This function writes the value '1' to the file specified by `bin_variable_file_path`, effectively 
+    resetting the bin variable to its default state. If the file does not exist, it will be created 
+    automatically. After writing, the function returns the value '1'.
+
+    Parameters:
+        None
+
+    Returns:
+        str: The bin variable value ('1').
+
+    Notes:
+        - This function overwrites any existing value in `bin_variable.txt` with '1'.
+        - The file is safely opened in write mode using a context manager to handle automatic closure.
+    """
+    bin_variable = '1'
+    with open(bin_variable_file_path, 'w') as bin_variable_file:
+        bin_variable_file.write(bin_variable)
+    return bin_variable
+
 def save_entry_log(df):
     df.to_excel(log_file_path, index=False)
     return None
@@ -193,13 +216,7 @@ def bin_changer():
     print(f"\nCurrent bin is now set to: {escape(new_bin_number)}\n")
     return None
 
-def bin_reset():
-    """Resets the bin_variable.txt file to '1'. Creates the file automatically if it doesn't already exist. Returns the bin variable."""
-    bin_variable = '1'
-    bin_variable_file = open(bin_variable_file_path, 'w')
-    bin_variable_file.write(bin_variable)
-    bin_variable_file.close()
-    return bin_variable
+
 
 def auto_save(df):
     if (len(df) % 5) == 0:
