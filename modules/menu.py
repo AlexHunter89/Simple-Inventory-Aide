@@ -23,8 +23,19 @@ menu_options = [
     ]
 
 def display_menu(user_identity, current_bin):
-    """Displays the main menu. It shows all of the available actions that the user can take.
-    Also displays the current active user and current bin."""
+    """
+    Displays the main menu and prompts the user to select an action.
+
+    Parameters:
+        user_identity (str): The name or identifier of the current user.
+        current_bin (str): The current active bin, which provides context for user operations.
+
+    Returns:
+        str: The user's selected menu option from the available choices.
+
+    This function displays the current user identity and active bin, followed by a numbered list
+    of menu options. The user selects an option, and the chosen option is returned as a string.
+    """
     print(f"Current User: [blue]{escape(user_identity)}[/blue]")
     print(f"The current bin is: {escape(current_bin)}")
     user_menu_entry = pyip.inputMenu(menu_options, numbered=True)
