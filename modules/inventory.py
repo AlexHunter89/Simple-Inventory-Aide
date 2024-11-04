@@ -32,7 +32,7 @@ def get_item_details():
     return (description, price)
 
 def get_existing_upc_data(upc, df):
-    matches = df[df['UPC'] == upc]
+    matches = df[df['UPC'] == str(upc)]
     if not matches.empty:
         previous_entry = matches.iloc[0]
         description = previous_entry['Description']
