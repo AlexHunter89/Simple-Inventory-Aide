@@ -6,15 +6,10 @@ import sys
 from rich import print
 
 def main():
-    # This greets the user and ask for their identity
-    user_identity = greet_and_identify_user()
+    user_identity = greet_and_identify_user()   # This greets the user and ask for their identity
+    current_bin = bin_variable_file_handler()   # This will check to see if there is a bin variable text file. It displays the bin that was loaded or created
 
-    # This will check to see if there is a bin variable text file
-    # It displays the bin that was loaded or created
-    current_bin = bin_variable_file_handler()
-
-    # Main loop
-    while True:
+    while True: # Main loop
         # Prints user information and displays the menu
         user_menu_entry = display_menu(user_identity, current_bin)
 

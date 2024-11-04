@@ -1,6 +1,17 @@
-import pyinputplus as pyip
-from rich import print
-from rich.markup import escape
+try:
+    import pyinputplus as pyip
+except ImportError:
+    print("Error: The module 'pyinputplus' is not installed.")
+    print("Please install it by running: python -m pip install pyinputplus")
+    exit(1)
+
+try:
+    from rich import print
+    from rich.markup import escape
+except ImportError:
+    print("Error: The module 'rich' is not installed.")
+    print("Please install it by running: python -m pip install rich")
+    exit(1)
 
 def greet_and_identify_user():
     """Greets the user. Asks them for their name and employee number. Does not validate user information. Employee number must be in integer. Returns an 'identity'."""
