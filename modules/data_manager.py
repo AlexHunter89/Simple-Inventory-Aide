@@ -73,14 +73,12 @@ def bin_variable_file_handler():
         bin_variable_file = open(bin_variable_file_path)
         bin_variable = bin_variable_file.read()
         bin_variable_file.close()
-        print(f"The current bin is: {escape(bin_variable)}")
         return bin_variable
     else:
         bin_variable = '1'
         bin_variable_file = open(bin_variable_file_path, 'w')
         bin_variable_file.write(bin_variable)
         bin_variable_file.close()
-        print(f"The current bin is: {escape(bin_variable)}")
         return bin_variable
     
 def bin_changer():
