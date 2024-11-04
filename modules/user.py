@@ -43,7 +43,7 @@ def new_session_warning_sequence():
     This function is called when the user attempts to start a new inventory session. It first warns the 
     user that starting a new session will overwrite all previous session data. The user must confirm 
     if they want to continue, and if confirmed, they must enter an administrator password. The password 
-    is read from an external text file (`password.txt`). If the user declines or the password is incorrect, 
+    is read from an external text file (`admin.txt`). If the user declines or the password is incorrect, 
     the function will not allow the new session to start.
 
     Parameters:
