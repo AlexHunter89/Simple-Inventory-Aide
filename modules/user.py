@@ -35,15 +35,6 @@ def new_session_warning_sequence():
         return False
 
 
-                
-
-                # Creates a new DataFrame
-                #df = start_new_inventory_session()
-
-                # Resets the bin and returns the variable
-                #current_bin = bin_reset()
-
-
 def user_change_bin():
     change_bin_prompt = "\nWould you like to change the current bin you are working on? (yes/no): "
     change_bin_response = pyip.inputYesNo(prompt=change_bin_prompt)
