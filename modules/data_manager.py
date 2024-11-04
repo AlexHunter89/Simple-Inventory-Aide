@@ -209,13 +209,32 @@ def save_entry_log(df):
     return None
     
 def bin_changer():
+    """
+    Allows the user to change the current bin by entering a new bin identifier.
+
+    Prompts the user to enter a new bin number and writes this value to the `bin_variable.txt` file.
+    After updating the file, it prints a confirmation message displaying the new bin value and returns the new bin value.
+
+    Parameters:
+        None
+
+    Returns:
+        str: The new bin value set by the user.
+
+    Notes:
+        - The function writes the new bin value to the `bin_variable.txt` file, replacing any existing value.
+        - If an error occurs while writing to the file, an appropriate error message will be displayed.
+    """
     enter_bin_number_prompt = "\nPlease enter the bin you would like to work on: "
     new_bin_number = pyip.inputStr(prompt=enter_bin_number_prompt)
-    bin_variable_file = open(bin_variable_file_path, 'w')
-    bin_variable_file.write(new_bin_number)
-    bin_variable_file.close()
-    print(f"\nCurrent bin is now set to: {escape(new_bin_number)}\n")
-    return None
+    try:
+        with open(bin_variable_file_path, 'w') as bin_variable_file:
+            bin_variable_file.write(new_bin_number)
+        print(f"\n[green]Current bin is now set to: {escape(new_bin_number)}[/green]\n")
+        return new_bin_number
+    except IOError as e:
+        print(f"[red]Error: Unable to write to file '{bin_variable_file_path}'. Details: {e}[/red]")
+        return None
 
 
 
