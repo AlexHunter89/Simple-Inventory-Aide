@@ -151,3 +151,20 @@ def get_item_details():
             print("Invalid price. Price must be greater than zero. Please try again.")
 
     return description, price
+
+def get_quantity():
+    """
+    Prompt the user for quantity of items.
+    
+    Returns:
+        int: The quantity entered by the user. A value of 0 indicates no update to quantity.
+    """
+    quantity_entry_prompt = (
+        "Please enter the item quantity (Enter 0 to cancel adding/updating the item quantity): "
+    )
+    quantity = pyip.inputNum(prompt=quantity_entry_prompt, min=0)
+    
+    if quantity == 0:
+        print("Quantity set to 0. No quantity will be added for this item.")
+    
+    return quantity
