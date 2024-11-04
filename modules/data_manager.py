@@ -192,22 +192,6 @@ def load_inventory_session():
     df = dataframe_types_corrector(df)
     return df
 
-def save_inventory_log(df):
-    columns_to_drop = ['DateTime', 'User', 'Bin']
-    df = df.drop(columns=columns_to_drop)
-    df = df.groupby('UPC').agg({
-        'Description': 'first',
-        'Quantity': 'sum',
-        'Price': 'first'
-    }).reset_index()
-    df = df[['Description', 'Quantity', 'UPC', 'Price']]
-    df.to_excel(inventory_data_file_path, index=False)
-    return None
-
-def save_entry_log(df):
-    df.to_excel(log_file_path, index=False)
-    return None
-    
 def bin_changer():
     """
     Allows the user to change the current bin by entering a new bin identifier.
@@ -237,8 +221,22 @@ def bin_changer():
         print(f"[red]Error: Unable to write to file '{bin_variable_file_path}'. Details: {e}[/red]")
         return None
 
+def save_inventory_log(df):
+    columns_to_drop = ['DateTime', 'User', 'Bin']
+    df = df.drop(columns=columns_to_drop)
+    df = df.groupby('UPC').agg({
+        'Description': 'first',
+        'Quantity': 'sum',
+        'Price': 'first'
+    }).reset_index()
+    df = df[['Description', 'Quantity', 'UPC', 'Price']]
+    df.to_excel(inventory_data_file_path, index=False)
+    return None
 
-
+def save_entry_log(df):
+    df.to_excel(log_file_path, index=False)
+    return None
+    
 def auto_save(df):
     if (len(df) % 5) == 0:
         save_entry_log(df)
