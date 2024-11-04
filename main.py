@@ -57,10 +57,12 @@ def main():
             user_change_bin_response = user_change_bin()
 
             if user_change_bin_response == 'yes':
-                bin_changer()
-                current_bin = bin_variable_file_handler()
+                new_bin = bin_changer()
+                if new_bin:
+                    current_bin = new_bin
 
             else:
+                print("[yellow]Bin change cancelled. Returning to the main menu.[/yellow]")
                 continue
 
         elif user_menu_entry == 'Exit':
