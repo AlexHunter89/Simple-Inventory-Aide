@@ -9,6 +9,26 @@ inventory_data_file_path = Path(r"data\inventory.xlsx")
 log_file_path = Path(r"data\entry_log.xlsx")
 bin_variable_file_path = Path(r"data\bin_variable.txt")
 
+def bin_variable_file_handler():
+    """
+    Checks for the existence of 'bin_variable.txt' and reads its value.
+
+    If 'bin_variable.txt' exists, reads the content and uses it as the bin variable.
+    If the file does not exist or contains invalid content, it creates the file with a default value of '1'.
+
+    Returns:
+        str: The bin variable value, which defaults to '1' if no valid data is present.
+    """
+    if os.path.exists(bin_variable_file_path):
+        with open(bin_variable_file_path, 'r') as bin_variable_file:
+            bin_variable = bin_variable_file.read().strip()
+        return bin_variable
+    else:
+        bin_variable = '1'
+        with open(bin_variable_file_path, 'w') as bin_variable_file:
+            bin_variable_file.write(bin_variable)
+        return bin_variable
+
 def start_new_inventory_session():
         """Creates an empty DataFrame with appropriate column names."""
         columns = ['DateTime', 'Description', 'Quantity', 'UPC', 'Price', 'User', 'Bin']
@@ -62,21 +82,7 @@ def save_inventory_log(df):
     df.to_excel(inventory_data_file_path, index=False)
     return None
 
-def bin_variable_file_handler():
-    """Checks to see if a file bin_variable.txt exist.
-    If it does, it will read the file and use what is read as the bin variable.
-    If it does not, it will create the file and set the bin variable to default '1'."""
-    if os.path.exists(bin_variable_file_path):
-        bin_variable_file = open(bin_variable_file_path)
-        bin_variable = bin_variable_file.read()
-        bin_variable_file.close()
-        return bin_variable
-    else:
-        bin_variable = '1'
-        bin_variable_file = open(bin_variable_file_path, 'w')
-        bin_variable_file.write(bin_variable)
-        bin_variable_file.close()
-        return bin_variable
+
     
 def bin_changer():
     enter_bin_number_prompt = "\nPlease enter the bin you would like to work on: "
