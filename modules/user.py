@@ -86,7 +86,7 @@ def new_session_warning_sequence():
         print("\n[green]*New Session Started*[/green]")
         return True
     else:
-        print("\n[bold red]Access Denied[/bold red]\n")
+        print("\n[bold red]Access Denied[/bold red] [yellow]Returning to the main menu.[/yellow]\n")
         return False
 
 
