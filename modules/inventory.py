@@ -87,7 +87,51 @@ def get_existing_upc_data(upc, df):
         return None, None
 
 def add_item(df, date_time, description, quantity, upc, price, user_identity, current_bin):
-    new_item = {
+    """
+    Adds a new item to the inventory DataFrame.
+    
+    Args:
+        df (DataFrame): The current inventory DataFrame.
+        date_time (datetime): The current timestamp.
+        description (str): The description of the new item.
+        quantity (int): The quantity of the new item.
+        upc (str): The UPC code of the new item.
+        price (float): The price of the new item.
+        user_identity (str): The identity of the user adding the item.
+        current_bin (str): The identifier for the current inventory bin.
+    
+    Returns:
+        DataFrame: The updated inventory DataFrame.
+    
+    Raises:
+        ValueError: If any of the required values are invalid.
+    """
+    if not validate_item_inputs(description, quantity, price, upc): # Step 1: Validate inputs
+        raise ValueError("Invalid input values for new item.")
+    
+    new_item = construct_item(date_time, description, quantity, upc, price, user_identity, current_bin) # Step 2: Construct the new item
+
+    df.loc[len(df)] = new_item  # Step 3: Add the item to the DataFrame
+    
+    return df
+
+def construct_item(date_time, description, quantity, upc, price, user_identity, current_bin):
+    """
+    Constructs a dictionary for the new item being added to the inventory.
+    
+    Args:
+        date_time (datetime): The current timestamp.
+        description (str): The description of the new item.
+        quantity (int): The quantity of the new item.
+        upc (str): The UPC code of the new item.
+        price (float): The price of the new item.
+        user_identity (str): The identity of the user adding the item.
+        current_bin (str): The identifier for the current inventory bin.
+    
+    Returns:
+        dict: A dictionary representing the new item.
+    """
+    return {
         'DateTime': date_time,
         'Description': description,
         'Quantity': quantity,
@@ -97,8 +141,28 @@ def add_item(df, date_time, description, quantity, upc, price, user_identity, cu
         'Bin': current_bin
     }
 
-    df.loc[len(df)] = new_item
-    return df
+def validate_item_inputs(description, quantity, price, upc):
+    """
+    Validates the inputs for the item being added to the inventory.
+    
+    Args:
+        description (str): The item description.
+        quantity (int): The quantity of the item.
+        price (float): The price of the item.
+        upc (str): The UPC code of the item.
+    
+    Returns:
+        bool: True if all inputs are valid, False otherwise.
+    """
+    if not isinstance(description, str) or description.strip() == "":
+        return False
+    if not isinstance(quantity, int) or quantity < 0:
+        return False
+    if not isinstance(price, (int, float)) or price <= 0:
+        return False
+    if not isinstance(upc, str) or len(upc) != 12:
+        return False
+    return True
 
 def item_not_found_sequence(df,  upc, user_identity, current_bin):
     # Step 1: Notify the user that the item wasn't found
