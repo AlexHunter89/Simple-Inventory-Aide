@@ -1,4 +1,4 @@
-from modules.user import feature_coming_soon, greet_and_identify_user, warn_user_new_session, user_change_bin, get_admin_password
+from modules.user import feature_coming_soon, greet_and_identify_user, new_session_warning_sequence, user_change_bin, get_admin_password
 from modules.menu import display_menu
 from modules.inventory import item_found_sequence, item_not_found_sequence, get_upc, get_existing_upc_data
 from modules.data_manager import start_new_inventory_session, save_entry_log, load_inventory_session, save_inventory_log, bin_variable_file_handler, bin_changer, bin_reset
@@ -24,26 +24,10 @@ def main():
         if user_menu_entry == 'Start New Session (Not Recommended)':
 
             # Sends a warning to the user
-            user_new_session_warning_response = warn_user_new_session()
-            if user_new_session_warning_response == 'yes':
-                # Request a password
-                password_result = get_admin_password()
-
-                # If the password is incorrect it prints a message and goes back to main menu
-                if not password_result:
-                    print("\n[bold red]Access Denied[/bold red]\n")
-                    continue
-
-                # If the password is correct it starts a fresh session
-                print("\n[green]*New Session Started*[/green]")
-
-                # Creates a new DataFrame
+            user_new_session_warning_response = new_session_warning_sequence()
+            if user_new_session_warning_response:
                 df = start_new_inventory_session()
-
-                # Resets the bin and returns the variable
                 current_bin = bin_reset()
-
-                # Loop to ask user to enter UPCs until they exit
                 while True:
 
                     # Gets a UPC from the user. Converts it to a string with str() for parsing
@@ -62,6 +46,7 @@ def main():
                         break
             else:
                 continue
+
         elif user_menu_entry == 'Load Previous Session (Recommended)':
             print()
             print("[green]*Previous Session Loaded*[/green]")
