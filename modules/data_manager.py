@@ -77,17 +77,51 @@ def read_password_from_file():
         return None
 
 def start_new_inventory_session():
-        """Creates an empty DataFrame with appropriate column names."""
+        """
+        Creates an empty DataFrame with appropriate column names for inventory tracking.
+
+        The DataFrame is initialized with columns: 'DateTime', 'Description', 'Quantity', 
+        'UPC', 'Price', 'User', 'Bin'. The DataFrame is then passed through a type correction 
+        function (`dataframe_types_corrector`) to ensure that each column has the correct type.
+
+        Returns:
+            pd.DataFrame: A new, empty DataFrame with appropriate column names and corrected types.
+        """
         columns = ['DateTime', 'Description', 'Quantity', 'UPC', 'Price', 'User', 'Bin']
         df = pd.DataFrame(columns=columns)
         df = dataframe_types_corrector(df)
         return df
 
 def dataframe_types_corrector(df):
+    """
+    Converts the columns of the given DataFrame to their appropriate types.
+
+    This function ensures that the DataFrame columns are of the expected data types to maintain
+    consistency throughout the inventory tracking process. This is particularly useful when 
+    creating new DataFrames or loading data from external sources that may have inconsistent types.
+
+    The following conversions are performed:
+        - 'DateTime' is converted to datetime64[ns].
+        - 'Description', 'UPC', 'User', and 'Bin' are converted to string.
+        - 'Quantity' is converted to pd.Int64Dtype() to allow for missing values (NaN).
+        - 'Price' is converted to float.
+
+    Parameters:
+        df (pd.DataFrame): The DataFrame to be corrected.
+
+    Returns:
+        pd.DataFrame: A DataFrame with columns coerced to the specified types.
+
+    Notes:
+        - Columns must exist in the DataFrame before type conversion. This function assumes that 
+          the DataFrame has the correct columns present.
+        - Using `pd.Int64Dtype()` allows the 'Quantity' column to handle NaN values, which can be 
+          useful for incomplete entries.
+    """
     df = df.astype({
             'DateTime': 'datetime64[ns]',
             'Description': 'string',
-            'Quantity': 'int',
+            'Quantity': pd.Int64Dtype(), # Allows NaN values in Quantity
             'UPC': 'string',
             'Price': 'float',
             'User': 'string',
