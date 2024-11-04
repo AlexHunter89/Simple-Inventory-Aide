@@ -13,15 +13,35 @@ def greet_and_identify_user():
     print(f"\nWelcome: {escape(user_name)}")
     return employee_identity
 
-def warn_user_new_session():
+def new_session_warning_sequence():
     """Warns the user about the data overwrite that will occur when starting a new session.
     Ask them to confirm their action. This action should be reserved to administrators."""
     new_session_overwrite_warning = "\n[bold red]WARNING![/bold red] Starting a new session will overwrite any previous sessions.\n"
     user_continuation_prompt = "Are you sure you want to continue? (yes/no): "
     print(new_session_overwrite_warning)
     user_continuation_response = pyip.inputYesNo(prompt=user_continuation_prompt)
-    print()
-    return user_continuation_response
+    if user_continuation_response == 'yes':
+        password = 'admin'
+        password_prompt = "Please enter the password: "
+        user_password_response = pyip.inputPassword(prompt=password_prompt)
+        if user_password_response == password:
+            print("\n[green]*New Session Started*[/green]\n")
+            return True
+        else:
+            print("\n[bold red]Access Denied[/bold red]\n")
+            return False
+    else:
+        return False
+
+
+                
+
+                # Creates a new DataFrame
+                #df = start_new_inventory_session()
+
+                # Resets the bin and returns the variable
+                #current_bin = bin_reset()
+
 
 def user_change_bin():
     change_bin_prompt = "\nWould you like to change the current bin you are working on? (yes/no): "
