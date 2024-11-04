@@ -62,7 +62,7 @@ def new_session_warning_sequence():
     user_continuation_response = pyip.inputYesNo(prompt=user_continuation_prompt)
     print()
 
-    if user_continuation_prompt == 'no':
+    if user_continuation_response == 'no':
         return False
     
     new_session_overwrite_warning_2 = "\nPlease note that continuing will overwrite any previous data."
