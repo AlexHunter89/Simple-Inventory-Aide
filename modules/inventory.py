@@ -1,7 +1,23 @@
 import pyinputplus as pyip
 from datetime import datetime
 from modules.data_manager import auto_save, save_entry_log, save_inventory_log
+from modules.user import get_user_upc_input
 from rich import print
+
+def validate_upc(upc):
+    """
+    Validates the UPC code format.
+    
+    Args:
+        upc (str): The UPC code entered by the user.
+        
+    Returns:
+        bool: True if the UPC is valid, False otherwise.
+    """
+    if len(upc) != 12:
+        print("Invalid UPC length. Please enter a 12-digit UPC code.")
+        return False
+    return True
 
 def get_upc(df, user_identity, current_bin):
     """Ask the user to enter a UPC number. Checks an integer and length of 12 digits (This is standard UPC length).
