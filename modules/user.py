@@ -20,11 +20,11 @@ def new_session_warning_sequence():
     user_continuation_prompt = "Are you sure you want to continue? (yes/no): "
     print(new_session_overwrite_warning)
     user_continuation_response = pyip.inputYesNo(prompt=user_continuation_prompt)
+    print()
     if user_continuation_response == 'yes':
         password = 'admin'
         password_prompt = "Please enter the password: "
         user_password_response = pyip.inputPassword(prompt=password_prompt)
-        print()
         if user_password_response == password:
             print("\n[green]*New Session Started*[/green]\n")
             return True
