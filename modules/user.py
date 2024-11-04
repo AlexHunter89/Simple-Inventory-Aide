@@ -111,3 +111,14 @@ def user_change_bin():
     
 def feature_coming_soon():
     print("\n[blue]Feature coming soon![/blue]\n")
+
+def get_user_upc_input():
+    """
+    Prompts the user for a UPC code and returns the value.
+    
+    Returns:
+        str: The UPC code inputted by the user or an empty string if the user wishes to return.
+    """
+    upc_entry_prompt = "\nPlease enter a UPC code (Or press Enter to save and return to the Main Menu): "
+    upc = pyip.inputNum(prompt=upc_entry_prompt, blank=True)
+    return str(upc)
