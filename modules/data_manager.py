@@ -156,11 +156,6 @@ def bin_reset():
         return None # Return None to indicate an error occurred
     return bin_variable
 
-def save_entry_log(df):
-    df.to_excel(log_file_path, index=False)
-    return None
-
-
 def load_inventory_session():
     """
     Loads the inventory session from an existing log file or creates a new session.
@@ -209,7 +204,9 @@ def save_inventory_log(df):
     df.to_excel(inventory_data_file_path, index=False)
     return None
 
-
+def save_entry_log(df):
+    df.to_excel(log_file_path, index=False)
+    return None
     
 def bin_changer():
     enter_bin_number_prompt = "\nPlease enter the bin you would like to work on: "
