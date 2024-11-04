@@ -31,7 +31,7 @@ def main():
                         save_inventory_log(df)
                         break
             else:
-                print("[yellow]Returning to the main menu. Session was not started.[/yellow]")
+                print("[yellow]Returning to the main menu. Session was not started.[/yellow]\n")
                 continue
 
         elif user_menu_entry == 'Load Previous Session (Recommended)':

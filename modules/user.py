@@ -65,7 +65,7 @@ def new_session_warning_sequence():
     if user_continuation_response == 'no':
         return False
     
-    new_session_overwrite_warning_2 = "\nPlease note that continuing will overwrite any previous data."
+    new_session_overwrite_warning_2 = "\nPlease note that continuing will overwrite any previous data.\n"
     print(new_session_overwrite_warning_2)
     password = 'admin'
     password_prompt = "Please enter the password: "
