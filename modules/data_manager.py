@@ -227,6 +227,7 @@ def bin_changer():
     """
     enter_bin_number_prompt = "\nPlease enter the bin you would like to work on: "
     new_bin_number = pyip.inputStr(prompt=enter_bin_number_prompt)
+    
     try:
         with open(bin_variable_file_path, 'w') as bin_variable_file:
             bin_variable_file.write(new_bin_number)
