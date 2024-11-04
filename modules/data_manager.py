@@ -34,6 +34,7 @@ def save_entry_log(df):
 
 
 def load_inventory_session():
+    print("\n[green]*Previous Session Loaded*[/green]")
     new_dataframe_prompt = "Initializing new DataFrame..."
     if os.path.exists(log_file_path):
         try:
