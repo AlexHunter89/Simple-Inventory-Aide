@@ -109,11 +109,15 @@ def item_not_found_sequence(df,  upc, user_identity, current_bin):
 
     if description is None and price is None:
         print("No item added. Returning to main menu.")
-        return  None # If user cancels entry, stop further processing.
+        return None # If user cancels entry, stop further processing.
 
-    quantity = get_quantity()
+    quantity = get_quantity()   # Step 3: Gather quantity details
 
-    date_time = datetime.now()
+    if quantity == 0:
+        print("No quantity added. Returning to main menu.")
+        return None # Stop further processing if quantity is zero.
+
+    date_time = datetime.now()  # Step 5: Get the current timestamp
 
     df = add_item(df, date_time, description, quantity, upc, price, user_identity, current_bin)
     auto_save(df)
