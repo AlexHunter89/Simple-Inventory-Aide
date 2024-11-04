@@ -55,7 +55,7 @@ def new_session_warning_sequence():
             - Returns False if the user declines to continue, the password file cannot be read, or if the password is incorrect.
         
     Notes:
-        - The password is read from a file named `password.txt`. Ensure this file exists and contains 
+        - The password is read from a file named `admin.txt`. Ensure this file exists and contains 
           the correct password.
         - For demonstration purposes, this approach is used to keep things simple, but for production use, 
           stronger security measures should be implemented, such as using environment variables or secure vaults.
