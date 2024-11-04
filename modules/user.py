@@ -14,15 +14,25 @@ except ImportError:
     exit(1)
 
 def greet_and_identify_user():
-    """Greets the user. Asks them for their name and employee number. Does not validate user information. Employee number must be in integer. Returns an 'identity'."""
+    """
+    Greets the user and captures their name and employee number.
+
+    Prompts the user to input their name and employee number, both of which are required
+    for identification purposes. The employee number must be an integer, but the values 
+    are not validated against an external database.
+
+    Returns:
+        str: A concatenated string combining the user's name and employee number in the format
+        'user_name: employee_number', used to track the current user.   
+    """
     print("\nWelcome to the inventory tracking system.\n")
     user_name_prompt = "Please enter your name: "
     user_name = pyip.inputStr(prompt=user_name_prompt, strip=True)
     employee_number_prompt = "Please enter your employee number: "
-    employee_number = pyip.inputNum(prompt=employee_number_prompt, strip=True)
-    employee_identity = user_name + ": " + str(employee_number)
+    employee_number = pyip.inputNum(prompt=employee_number_prompt, min=0, strip=True)
+    user_identity = f"{escape(user_name)}: {escape(employee_number)}"
     print(f"\nWelcome: {escape(user_name)}")
-    return employee_identity
+    return user_identity
 
 def new_session_warning_sequence():
     """Warns the user about the data overwrite that will occur when starting a new session.

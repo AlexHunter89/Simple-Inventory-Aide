@@ -10,8 +10,7 @@ def main():
     current_bin = bin_variable_file_handler()   # This will check to see if there is a bin variable text file. It displays the bin that was loaded or created
 
     while True: # Main loop
-        # Prints user information and displays the menu
-        user_menu_entry = display_menu(user_identity, current_bin)
+        user_menu_entry = display_menu(user_identity, current_bin) # Display main menu
 
         # If the user wants to start a new session
         if user_menu_entry == 'Start New Session (Not Recommended)':
