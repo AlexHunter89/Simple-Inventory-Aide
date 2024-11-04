@@ -32,9 +32,11 @@ def main():
 
                 while True:
                     # Gets a UPC from the user. Converts it to a string with str() for parsing
-                    upc = get_upc(df, user_identity, current_bin)
+                    upc, df = get_upc(df, user_identity, current_bin)
                     # If the UPC is a blank entry the user will return to the main menu
                     if upc == '':
+                        save_entry_log(df)
+                        save_inventory_log(df)
                         break
             else:
                 continue
@@ -45,9 +47,11 @@ def main():
 
             while True:
                 # Gets a UPC from the user. Converts it to a string with str() for parsing
-                upc = str(get_upc(df, user_identity, current_bin))
+                upc, df = str(get_upc(df, user_identity, current_bin))
                 # If the UPC is a blank entry the user will return to the main menu
                 if upc == '':
+                    save_entry_log(df)
+                    save_inventory_log(df)
                     break
 
         elif user_menu_entry == 'Delete Entry':
