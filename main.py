@@ -2,6 +2,7 @@ from modules.user import feature_coming_soon, greet_and_identify_user, new_sessi
 from modules.menu import display_menu
 from modules.inventory import get_upc
 from modules.data_manager import start_new_inventory_session, save_entry_log, load_inventory_session, save_inventory_log, bin_variable_file_handler, bin_changer, bin_reset
+from modules.helper_bot import open_ai_helper_bot
 import sys
 
 try:
@@ -79,6 +80,11 @@ def main():
         elif user_menu_entry == 'Exit':
             print("\nThank you for using the Inventory System...")
             sys.exit()
+
+        elif user_menu_entry == 'AI Helpbot (Bonus)':
+            if open_ai_helper_bot() == True:
+                print("[yellow]Helper Bot is closing. Returning to the main menu.[/yellow]")
+                continue
 
 
 if __name__ == "__main__":
