@@ -60,4 +60,4 @@ while True:
         }
         )
 
-    print(response['choices'][0]["text"])
+    print(response.choices[0].message.content)
