@@ -3,6 +3,14 @@ from modules.user import chat_gpt_loop
 from pathlib import Path
 
 try:
+    from rich import print
+    from rich.markup import escape
+except ImportError:
+    print("Error: The module 'rich' is not installed.")
+    print("Please install it by running: python -m pip install rich")
+    exit(1)
+
+try:
     from openai import OpenAI
 except ImportError:
     print("Error: The module 'openai' is not installed.")
@@ -62,6 +70,6 @@ def open_ai_helper_bot():
             }
             )
 
-        print(response.choices[0].message.content)
+        print(f"[blue]{response.choices[0].message.content}[/blue]")
 
     return True
