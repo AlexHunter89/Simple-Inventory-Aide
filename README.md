@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
    If you have run the program previously you will likely see something like this:
 
-   ![normal run screenshot]()
+   ![normal run screenshot](https://github.com/AlexHunter89/Simple-Inventory-Aide/blob/main/screenshots_simple_inventory_aide/screenshot2.png?raw=true)
 
 4. **Main Menu Options**:
 
