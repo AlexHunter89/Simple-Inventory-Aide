@@ -1,5 +1,12 @@
+from pathlib import Path
 from openai import OpenAI
-client = OpenAI()
+
+key_file_path = Path(r"C:\Users\alexj\Documents\open_ai\key_1.txt")
+
+with open(file_path, 'r') as file:
+    key = file.read()
+
+client = OpenAI(api_key=key)
 
 completion = client.chat.completions.create(
     model="gpt-4o-mini",
