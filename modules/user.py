@@ -18,6 +18,7 @@ except ImportError:
 def chat_gpt_loop():
     question_prompt = "\nWhat can I help you with? (Type 'quit' to go back to the main menu)\n"
     user_question = pyip.inputStr(prompt=question_prompt)
+    print()
     return user_question
 
 def greet_and_identify_user():
