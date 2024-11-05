@@ -28,7 +28,7 @@ def open_ai_helper_bot():
     key = open_ai_key_reader()
     client = OpenAI(api_key=key)
 
-    welcome_to_help_prompt = "\nWelcome to the AI help system. Please ask it anything you would like.\n"
+    welcome_to_help_prompt = "\nWelcome to the AI help system. Please ask it anything you would like."
     print(welcome_to_help_prompt)
 
 
