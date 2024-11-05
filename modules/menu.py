@@ -19,7 +19,8 @@ menu_options = [
     'Delete Entry',
     'Modify Entry',
     'Change Current Bin',
-    'Exit'
+    'Exit',
+    'AI Helpbot (Bonus)'
     ]
 
 def display_menu(user_identity, current_bin):
