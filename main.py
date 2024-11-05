@@ -3,7 +3,21 @@ from modules.menu import display_menu
 from modules.inventory import get_upc
 from modules.data_manager import start_new_inventory_session, save_entry_log, load_inventory_session, save_inventory_log, bin_variable_file_handler, bin_changer, bin_reset
 import sys
-from rich import print
+
+try:
+    import pandas as pd
+except ImportError:
+    print("Error: The module 'pandas' is not installed.")
+    print("Please install it by running: python -m pip install pandas")
+    exit(1)
+
+try:
+    from rich import print
+    from rich.markup import escape
+except ImportError:
+    print("Error: The module 'rich' is not installed.")
+    print("Please install it by running: python -m pip install rich")
+    exit(1)
 
 def main():
     user_identity = greet_and_identify_user()   # Greets user and returns their 'identity'
