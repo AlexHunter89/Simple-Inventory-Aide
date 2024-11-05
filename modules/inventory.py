@@ -165,6 +165,39 @@ def validate_item_inputs(description, quantity, price, upc):
     return True
 
 def item_not_found_sequence(df,  upc, user_identity, current_bin):
+    """
+    Handles the scenario where an item with the given UPC code is not found in the inventory.
+    
+    This function guides the user through adding a new item to the inventory when an unknown UPC is entered.
+    It includes several steps such as notifying the user, gathering item details (description, price, and quantity),
+    adding the item to the inventory DataFrame, and saving the updated inventory data. The function ensures data integrity
+    by allowing the user to cancel the operation at any stage.
+    
+    Args:
+        df (DataFrame): The current inventory DataFrame.
+        upc (str): The UPC code of the item that was not found in the inventory.
+        user_identity (str): The identity of the user performing the operation.
+        current_bin (str): The identifier for the current inventory bin where the item is being added.
+    
+    Steps:
+        1. Notify the user that the item was not found in the inventory.
+        2. Gather new item details such as description and price.
+            - If the user chooses to cancel the process, the function stops and returns to the main menu.
+        3. Gather quantity details for the new item.
+            - If the user enters a quantity of 0, the function stops and returns to the main menu.
+        4. Record the current timestamp for the entry.
+        5. Add the new item to the inventory DataFrame with all gathered details.
+        6. Automatically save the inventory data every 5 entries.
+        7. Display the last few rows of the updated inventory to confirm the addition.
+
+    Returns:
+        None: The function updates the DataFrame in-place and handles all subsequent actions without returning a value.
+    
+    Notes:
+        - The function ensures that the user can cancel at any point if they decide not to add the item.
+        - Autosave is triggered every 5 entries to minimize data loss risks.
+        - Data persistence is handled through calls to `auto_save()`, which saves a full entry log and an inventory summary.
+    """
     # Step 1: Notify the user that the item wasn't found
     item_details_needed_prompt = "\n[yellow]Could not find item in database. Please enter the details.[/yellow]\n"
     print(item_details_needed_prompt)
@@ -185,10 +218,12 @@ def item_not_found_sequence(df,  upc, user_identity, current_bin):
 
     # Step 6: Add the new item to the inventory DataFrame
     df = add_item(df, date_time, description, quantity, upc, price, user_identity, current_bin)
-    
-    auto_save(df)
-    print()
+
+    auto_save(df)   # Saves data every 5 entries
+
+    print() # Print some space and then the previous 5 entries
     print(df.tail())
+
     return None
 
 def item_found_sequence(df, description, upc, price, user_identity, current_bin):
