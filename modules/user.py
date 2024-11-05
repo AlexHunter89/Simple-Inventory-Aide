@@ -168,8 +168,6 @@ def get_quantity():
     return quantity
 
 def chat_gpt_greeting():
-    welcome_to_help_prompt = "\nWelcome to the AI help system. Please ask it anything you would like.\n"
-    print(welcome_to_help_prompt)
     question_prompt = "\nWhat can I help you with?\n"
     user_question = pyip.inputStr(prompt=question_prompt)
     return user_question
