@@ -1,6 +1,6 @@
 import pyinputplus as pyip
 from datetime import datetime
-from modules.data_manager import auto_save, save_entry_log, save_inventory_log
+from modules.data_manager import auto_save
 from modules.user import get_user_upc_input, get_item_details, get_quantity
 from rich import print
 
