@@ -176,7 +176,7 @@ def load_inventory_session():
         - The inventory log file is expected to be in Excel format (`.xlsx`). Ensure `log_file_path` points to a valid file.
         - If the file cannot be found or loaded, a new session will be initialized.
     """
-    previous_dataframe_prompt = "\n[green]*Previous Session Loaded*[/green]"
+    previous_dataframe_prompt = "\n[green]*Previous Session Loaded*[/green]\n"
     new_dataframe_prompt = "Initializing new DataFrame...\n"
 
     if os.path.exists(log_file_path):
