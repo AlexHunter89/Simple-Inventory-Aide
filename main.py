@@ -13,7 +13,7 @@ def main():
     while True: # Main loop
         user_menu_entry = display_menu(user_identity, current_bin) # Display main menu
 
-        if user_menu_entry == 'Start New Session (Not Recommended)':            
+        if user_menu_entry == 'Start New Session (Not Recommended)':
             user_new_session_warning_response = new_session_warning_sequence()  # Sends a warning to the user
 
             if user_new_session_warning_response:
@@ -32,9 +32,6 @@ def main():
                 continue
 
         elif user_menu_entry == 'Load Previous Session (Recommended)':
-            # Loads the previous Excel file to continue work
-            df = load_inventory_session()
-
             while True:
                 # Gets a UPC from the user. Converts it to a string with str() for parsing
                 upc, df = str(get_upc(df, user_identity, current_bin))
