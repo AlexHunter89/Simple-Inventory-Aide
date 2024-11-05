@@ -33,7 +33,7 @@ autosave_interval = 5
 
 def open_ai_key_reader():
     with open(key_file_path, 'r') as file:
-    key = file.read()
+        key = file.read()
     return key
 
 def bin_variable_file_handler():
