@@ -46,8 +46,10 @@ pip install -r requirements.txt
 2. **User Identification**:
    
    The system will greet you and ask for your name and employee number. This information is used to identify the user and is displayed during the session.
+   The first time you run this program you should see something like this:
+   ![initial run screenshot]()
 
-3. **Main Menu Options**:
+4. **Main Menu Options**:
 
    After user identification, you will see the following menu options, each designed to guide you through inventory management:
 
@@ -58,12 +60,12 @@ pip install -r requirements.txt
    - **Change Current Bin**: Allows you to switch to a different inventory bin for better organization of items.
    - **Exit**: Ends the session and closes the program.
 
-4. **Inventory Management**:
+5. **Inventory Management**:
    - **Entering UPCs**: You will be prompted to enter a UPC code. If the code is already in the inventory, you can add a quantity. If it's a new item, you will be asked to provide additional details.
    - **Adding New Items**: If the UPC is not found, you'll be guided to enter the item description, price, and quantity. The data is recorded along with a timestamp and user details.
    - **Changing Bins**: You can change the bin in which the item will be stored, allowing for more organized inventory management.
 
-5. **Autosave**:
+6. **Autosave**:
    
    The system automatically saves inventory data every 5 entries. This ensures that all changes are consistently backed up without requiring manual intervention.
 
