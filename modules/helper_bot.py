@@ -64,4 +64,4 @@ def open_ai_helper_bot():
 
         print(response.choices[0].message.content)
 
-    return None
+    return True
