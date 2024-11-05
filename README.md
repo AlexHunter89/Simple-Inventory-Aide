@@ -89,7 +89,7 @@ pip install -r requirements.txt
 
 ## Data Persistence
 
-- **Inventory Data**: Inventory information is saved in an Excel file (`data/inventory.xlsx`). A detailed entry log is also saved as `data/entry_log.xlsx`. Please note that users may need to manually check and back up these files if additional data security is required. Inventory information is saved in an Excel file (`data/inventory.xlsx`). A detailed entry log is also saved as `data/entry_log.xlsx`.
+- **Inventory Data**: Inventory information is saved in an Excel file (`data/inventory.xlsx`). A detailed entry log is also saved as `data/entry_log.xlsx`. Please note that users may need to manually check and back up these files if additional data security is required.
 - **User Authentication**: Administrator actions (such as starting a new session) require a password, which is read from the file `data/admin.txt`. Please make sure this file exists and is correctly configured.
 
 ## Handling Errors
