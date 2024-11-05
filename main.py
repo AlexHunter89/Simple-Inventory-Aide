@@ -1,6 +1,6 @@
 from modules.user import feature_coming_soon, greet_and_identify_user, new_session_warning_sequence, user_change_bin
 from modules.menu import display_menu
-from modules.inventory import item_found_sequence, item_not_found_sequence, get_upc, get_existing_upc_data
+from modules.inventory import get_upc
 from modules.data_manager import start_new_inventory_session, save_entry_log, load_inventory_session, save_inventory_log, bin_variable_file_handler, bin_changer, bin_reset
 import sys
 from rich import print
