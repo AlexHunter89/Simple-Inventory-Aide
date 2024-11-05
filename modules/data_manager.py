@@ -177,7 +177,7 @@ def load_inventory_session():
         - If the file cannot be found or loaded, a new session will be initialized.
     """
     previous_dataframe_prompt = "\n[green]*Previous Session Loaded*[/green]"
-    new_dataframe_prompt = "Initializing new DataFrame..."
+    new_dataframe_prompt = "Initializing new DataFrame...\n"
 
     if os.path.exists(log_file_path):
         try:
