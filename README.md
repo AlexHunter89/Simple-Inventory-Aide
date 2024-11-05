@@ -47,7 +47,12 @@ pip install -r requirements.txt
    
    The system will greet you and ask for your name and employee number. This information is used to identify the user and is displayed during the session.
    The first time you run this program you should see something like this:
+   
    ![initial run screenshot](https://github.com/AlexHunter89/Simple-Inventory-Aide/blob/main/screenshots_simple_inventory_aide/screenshot1.png?raw=true)
+
+   If you have run the program previously you will likely see something like this:
+
+   ![normal run screenshot]()
 
 4. **Main Menu Options**:
 
