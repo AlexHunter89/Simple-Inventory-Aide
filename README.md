@@ -11,11 +11,11 @@ Comprehensive Docstrings: Added detailed docstrings throughout the code to facil
 Bug Fixes: Fixed an issue that affected the recognition of preexisting UPCs in the database. The workflow for managing inventory entries, especially with distinguishing between new and existing items, has been streamlined. The DataFrame interactions are now more robust, ensuring smoother operations.
 This refactor not only fixes existing bugs but also provides a solid foundation for adding new features and tracking data more effectively in the future.
 
-*BONUS! You will also see a special menu option that is not covered in the guide below.
+**BONUS! You will also see a special menu option that is not covered in the guide below.
 This feature will be broken without an Open AI API key.
 If you want this feature to work you must replace the key_file_path variable in the data_manager.py file with a file path of your own.
 This file path should lead to a plain .txt file that holds your API key. If you have experience with Open AI's API process you might
-want to adjust the code to use your environmental variable instead as that is the recommended way to secure your key.*
+want to adjust the code to use your environmental variable instead as that is the recommended way to secure your key.**
 
 Thank you all for your patience during this refactoring process! The code is back in working order, and I’m looking forward to any feedback or contributions you might have.
 
