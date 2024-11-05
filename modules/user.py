@@ -89,7 +89,6 @@ def new_session_warning_sequence():
         print("\n[bold red]Access Denied[/bold red] [yellow]Returning to the main menu.[/yellow]\n")
         return False
 
-
 def user_change_bin():
     """
     Prompts the user to confirm if they want to change the current bin.
@@ -108,7 +107,6 @@ def user_change_bin():
     change_bin_response = pyip.inputYesNo(prompt=change_bin_prompt, default=default_answer)
     return change_bin_response
 
-    
 def feature_coming_soon():
     print("\n[blue]Feature coming soon![/blue]\n")
 
