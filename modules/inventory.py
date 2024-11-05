@@ -227,14 +227,37 @@ def item_not_found_sequence(df,  upc, user_identity, current_bin):
     return None
 
 def item_found_sequence(df, description, upc, price, user_identity, current_bin):
-    item_details_found_prompt = "Item found! Details extracted!"
-    print()
-    print(f"[yellow]{item_details_found_prompt}[/yellow]")
-    print()
-    quantity = get_quantity()
-    date_time = datetime.now()
-    df = add_item(df, date_time, description, quantity, upc, price, user_identity, current_bin)                            
-    auto_save(df)
-    print()
+    """
+    Handles the scenario when an item with the given UPC is found in the inventory.
+    
+    This function allows the user to add more quantities of an existing item, effectively keeping
+    a record of every user interaction to maintain a full log of entries for tracking purposes.
+    It also ensures the updated inventory is saved automatically.
+
+    Args:
+        df (DataFrame): The current inventory DataFrame.
+        description (str): The description of the found item.
+        upc (str): The UPC code of the item found.
+        price (float): The price of the found item.
+        user_identity (str): The identity of the user performing the operation.
+        current_bin (str): The identifier for the current inventory bin.
+
+    Returns:
+        None
+    """
+    item_details_found_prompt = "\n[yellow]Item found! Details extracted![/yellow]\n"   # Step 1: Notify the user that the item was found
+    print(item_details_found_prompt)
+
+    quantity = get_quantity()   # Step 2: Gather quantity details
+
+    date_time = datetime.now()  # Step 3: Record the current timestamp for logging purposes
+
+    # Step 4: Add the new interaction to the inventory DataFrame as a new entry
+    df = add_item(df, date_time, description, quantity, upc, price, user_identity, current_bin)
+
+    auto_save(df)   # Step 5: Save the updated DataFrame automatically every 5 entries
+
+    print() # Step 6: Display the last few rows of the updated inventory as confirmation
     print(df.tail())
+    
     return None
