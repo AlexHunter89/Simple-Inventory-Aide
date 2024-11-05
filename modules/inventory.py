@@ -1,7 +1,14 @@
-import pyinputplus as pyip
-from datetime import datetime
 from modules.data_manager import auto_save
 from modules.user import get_user_upc_input, get_item_details, get_quantity
+from datetime import datetime
+
+try:
+    import pyinputplus as pyip
+except ImportError:
+    print("Error: The module 'pyinputplus' is not installed.")
+    print("Please install it by running: python -m pip install pyinputplus")
+    exit(1)
+
 from rich import print
 
 def validate_upc(upc):
