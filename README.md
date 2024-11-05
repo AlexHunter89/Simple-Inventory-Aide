@@ -11,7 +11,7 @@ Comprehensive Docstrings: Added detailed docstrings throughout the code to facil
 Bug Fixes: Fixed an issue that affected the recognition of preexisting UPCs in the database. The workflow for managing inventory entries, especially with distinguishing between new and existing items, has been streamlined. The DataFrame interactions are now more robust, ensuring smoother operations.
 This refactor not only fixes existing bugs but also provides a solid foundation for adding new features and tracking data more effectively in the future.
 
-### BONUS!
+#### BONUS!
 
 You will also see a special menu option that is not covered in the guide below.
 This feature will be broken without an Open AI API key.
