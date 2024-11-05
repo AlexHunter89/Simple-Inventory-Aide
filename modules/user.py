@@ -166,8 +166,3 @@ def get_quantity():
         print("Quantity set to 0. No quantity will be added for this item.")
     
     return quantity
-
-def chat_gpt_greeting():
-    question_prompt = "\nWhat can I help you with?\n"
-    user_question = pyip.inputStr(prompt=question_prompt)
-    return user_question
