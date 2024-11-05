@@ -50,7 +50,7 @@ while True:
         "content": [
             {
             "type": "text",
-            "text": "I need help!"
+            "text": user_question
             }
         ]
         },
@@ -64,4 +64,4 @@ while True:
     }
     )
 
-    print(completion.choices[0].message)
+    print(response)
