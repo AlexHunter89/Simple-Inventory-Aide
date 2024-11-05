@@ -83,7 +83,7 @@ def main():
 
         elif user_menu_entry == 'AI Helpbot (Bonus)':
             if open_ai_helper_bot() == True:
-                print("[yellow]Helper Bot is closing. Returning to the main menu.[/yellow]")
+                print("\n[yellow]Helper Bot is closing. Returning to the main menu.[/yellow]\n")
                 continue
 
 
