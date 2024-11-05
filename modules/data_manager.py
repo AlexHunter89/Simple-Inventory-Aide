@@ -222,18 +222,38 @@ def bin_changer():
         return None
 
 def save_inventory_log(df):
-    columns_to_drop = ['DateTime', 'User', 'Bin']
+    """
+    Saves a summary of the inventory log.
+    
+    Args:
+        df (DataFrame): The inventory DataFrame.
+    
+    Returns:
+        None
+    """
+    columns_to_drop = ['DateTime', 'User', 'Bin']   # Drop unneeded columns and aggregate data for inventory summary
     df = df.drop(columns=columns_to_drop)
+
     df = df.groupby('UPC').agg({
         'Description': 'first',
         'Quantity': 'sum',
         'Price': 'first'
     }).reset_index()
+
     df = df[['Description', 'Quantity', 'UPC', 'Price']]
     df.to_excel(inventory_data_file_path, index=False)
     return None
 
 def save_entry_log(df):
+    """
+    Saves a detailed entry log of all inventory data.
+    
+    Args:
+        df (DataFrame): The inventory DataFrame.
+    
+    Returns:
+        None
+    """
     df.to_excel(log_file_path, index=False)
     return None
     
