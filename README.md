@@ -1,14 +1,17 @@
 # Inventory Tracking System
 
-## Update: Major Refactoring in Progress
+## Update: Major Refactoring Complete – Code Readability & Bug Fixes
 
-Hello, everyone! I wanted to share a quick update regarding some ongoing improvements to the project.
+Hello everyone! I’m thrilled to share that I’ve completed a significant refactoring of the codebase to greatly enhance readability, maintainability, and functionality.
 
-I am currently conducting a significant refactoring of the code base to improve readability and maintainability. As part of this process, I’m also adding docstrings across the code to facilitate easier collaboration and understanding for anyone interested in contributing.
+Key improvements include:
 
-However, please be aware that during this overhaul, the DataFrame functionality is temporarily impacted, particularly with recognizing preexisting UPCs in the database. I’m actively working to resolve these issues as part of the overall refactoring and bug-squashing effort. I expect to have everything back in working order within the next day or two.
+Enhanced Code Readability: Major sections of the code have been rewritten with clearer logic flows, making it much easier to understand and navigate. Each menu option now follows a distinct, easy-to-track path for better separation of concerns.
+Comprehensive Docstrings: Added detailed docstrings throughout the code to facilitate easier onboarding for new contributors and improve long-term maintainability.
+Bug Fixes: Fixed an issue that affected the recognition of preexisting UPCs in the database. The workflow for managing inventory entries, especially with distinguishing between new and existing items, has been streamlined. The DataFrame interactions are now more robust, ensuring smoother operations.
+This refactor not only fixes existing bugs but also provides a solid foundation for adding new features and tracking data more effectively in the future.
 
-Thank you for your patience, and stay tuned for updates!
+Thank you all for your patience during this refactoring process! The code is back in working order, and I’m looking forward to any feedback or contributions you might have.
 
 ## Overview
 
