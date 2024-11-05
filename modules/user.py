@@ -15,6 +15,11 @@ except ImportError:
     print("Please install it by running: python -m pip install rich")
     exit(1)
 
+def chat_gpt_loop():
+    question_prompt = "\nWhat can I help you with? (Type 'quit' to go back to the main menu)\n"
+    user_question = pyip.inputStr(prompt=question_prompt)
+    return user_question
+
 def greet_and_identify_user():
     """
     Greets the user and captures their name and employee number.
