@@ -13,8 +13,10 @@ This refactor not only fixes existing bugs but also provides a solid foundation 
 
 #### BONUS!
 
-You will also see a special menu option that is not covered in the guide below.
+You will also see a special menu option that is not yet fully covered in the guide below. I will update it further soon.
+
 This feature will be broken without an Open AI API key and without installing openai through pip for Python.
+
 If you want this feature to work you must replace the *key_file_path* variable in the *data_manager.py* file with a file path of your own.
 This file path should lead to a plain .txt file that holds your API key. If you have experience with Open AI's API process you might
 want to adjust the code to use your environmental variable instead as that is the recommended way to secure your key.
