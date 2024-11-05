@@ -14,10 +14,15 @@ This refactor not only fixes existing bugs but also provides a solid foundation 
 #### BONUS!
 
 You will also see a special menu option that is not covered in the guide below.
-This feature will be broken without an Open AI API key.
+This feature will be broken without an Open AI API key and without installing openai through pip for Python.
 If you want this feature to work you must replace the *key_file_path* variable in the *data_manager.py* file with a file path of your own.
 This file path should lead to a plain .txt file that holds your API key. If you have experience with Open AI's API process you might
 want to adjust the code to use your environmental variable instead as that is the recommended way to secure your key.
+You must also install openai for Python using pip as follows:
+
+```sh
+python -m pip install openai
+```
 
 Thank you all for your patience during this refactoring process! The code is back in working order, and I’m looking forward to any feedback or contributions you might have.
 
@@ -89,10 +94,10 @@ pip install -r requirements.txt
 
 ## Handling Errors
 
-- **Module Imports**: Ensure all necessary modules (`pandas`, `rich`, `pyinputplus`) are installed. If any of these modules are missing, the program will prompt you to install them. If you encounter issues with module installation, try running the following command to install the required module:
+- **Module Imports**: Ensure all necessary modules (`pandas`, `rich`, `pyinputplus`, `openai`) are installed. If any of these modules are missing, the program will prompt you to install them. If you encounter issues with module installation, try running the following command to install the required module:
   ```sh
   pip install module_name
-  ``` Ensure all necessary modules (`pandas`, `rich`, `pyinputplus`) are installed. If any of these modules are missing, the program will prompt you to install them.
+  ``` Ensure all necessary modules (`pandas`, `rich`, `pyinputplus`, 'openai') are installed. If any of these modules are missing, the program will prompt you to install them.
 - **File Handling**: Make sure required data files (e.g., `inventory.xlsx`, `entry_log.xlsx`, `bin_variable.txt`, `admin.txt`) are available and accessible.
 
 ## Dependencies
@@ -102,6 +107,7 @@ This project uses the following Python libraries:
 - **pandas**: For handling data storage and manipulation.
 - **rich**: For improved console output.
 - **pyinputplus**: For user input handling with additional validation.
+- **openai**: For using the chatbot.
 
 All dependencies are listed in `requirements.txt`. Run the following command to install them:
 
