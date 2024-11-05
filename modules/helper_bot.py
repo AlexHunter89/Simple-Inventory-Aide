@@ -3,7 +3,7 @@ from openai import OpenAI
 
 key_file_path = Path(r"C:\Users\alexj\Documents\open_ai\key_1.txt")
 
-with open(file_path, 'r') as file:
+with open(key_file_path, 'r') as file:
     key = file.read()
 
 client = OpenAI(api_key=key)
