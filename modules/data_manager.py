@@ -27,8 +27,14 @@ inventory_data_file_path = Path(r"data\inventory.xlsx")
 log_file_path = Path(r"data\entry_log.xlsx")
 bin_variable_file_path = Path(r"data\bin_variable.txt")
 password_file_path = Path(r"data\admin.txt")
+key_file_path = Path(r"C:\Users\alexj\Documents\open_ai\key_1.txt")
 
 autosave_interval = 5
+
+def open_ai_key_reader():
+    with open(key_file_path, 'r') as file:
+    key = file.read()
+    return key
 
 def bin_variable_file_handler():
     """

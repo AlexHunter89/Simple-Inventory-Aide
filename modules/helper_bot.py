@@ -18,7 +18,7 @@ welcome_to_help_prompt = "\nWelcome to the AI help system. Please ask it anythin
 print(welcome_to_help_prompt)
 
 def chat_gpt_greeting():
-    question_prompt = "\nWhat can I help you with?\n"
+    question_prompt = "\nWhat can I help you with? (Type 'quit' to go back to the main menu)\n"
     user_question = pyip.inputStr(prompt=question_prompt)
     return user_question
 
@@ -30,7 +30,7 @@ while True:
         break
 
     response = client.chat.completions.create(
-        model="gpt-4-turbo",
+        model="gpt-4o-mini",
         messages=[
             {
             "role": "system",
