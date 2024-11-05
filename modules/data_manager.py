@@ -28,6 +28,8 @@ log_file_path = Path(r"data\entry_log.xlsx")
 bin_variable_file_path = Path(r"data\bin_variable.txt")
 password_file_path = Path(r"data\admin.txt")
 
+autosave_interval = 5
+
 def bin_variable_file_handler():
     """
     Checks for the existence of 'bin_variable.txt' and reads its value.
@@ -258,7 +260,17 @@ def save_entry_log(df):
     return None
     
 def auto_save(df):
-    if (len(df) % 5) == 0:
+    """
+    Automatically saves the inventory data if the number of entries reaches a specified interval.
+    
+    Args:
+        df (DataFrame): The inventory DataFrame.
+        autosave_interval (int): The interval at which autosave is triggered.
+    
+    Returns:
+        None
+    """
+    if (len(df) % autosave_interval) == 0:
         save_entry_log(df)
         save_inventory_log(df)
         auto_save_prompt = "\n[bold green]*(Autosave Complete)*[/bold green]\n"
