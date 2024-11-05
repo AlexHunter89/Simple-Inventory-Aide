@@ -21,15 +21,40 @@ def validate_upc(upc):
 
 def get_upc(df, user_identity, current_bin):
     """
-    Asks the user to enter a UPC number and handles validation and subsequent item lookups.
+    Asks the user to enter a UPC number and handles validation, item lookup, and subsequent actions.
     
+    This function manages the process of obtaining a UPC from the user, validating the entry, and looking
+    up the item in the inventory. Depending on whether the item is found, it either directs the user to 
+    add a new item to the inventory or updates the inventory by adding new quantities for an existing item.
+    Each user interaction is logged as a new entry to maintain a complete record of activity.
+
     Args:
         df (DataFrame): The inventory DataFrame.
         user_identity (str): The identity of the user performing the operation.
-        current_bin (str): The identifier for the current inventory bin.
-        
+        current_bin (str): The identifier for the current inventory bin where the item is being processed.
+
     Returns:
-        tuple: The UPC code (str) and the updated DataFrame.
+        tuple: A tuple containing:
+            - upc (str): The UPC code provided by the user. Returns an empty string if the user exits.
+            - df (DataFrame): The updated inventory DataFrame.
+
+    Steps:
+        1. Prompt the user to enter a UPC code.
+            - If the user enters a blank input, the function will return to the main menu.
+        2. Validate the UPC code length.
+            - Only UPCs of 12 digits are considered valid.
+            - Invalid entries prompt the user to re-enter a correct value.
+        3. Look up the item in the inventory DataFrame.
+            - If the item is not found (`description` is `None`), the `item_not_found_sequence()` is triggered, 
+              allowing the user to add a new item to the inventory.
+            - If the item is found, the `item_found_sequence()` is triggered, allowing the user to add more 
+              quantities of the existing item, with each interaction logged.
+        4. After either finding and updating an item or adding a new one, the loop ends, and the updated DataFrame is returned.
+
+    Notes:
+        - Every user interaction results in a new entry being added to the inventory DataFrame, ensuring a complete log of all actions.
+        - The function leverages `item_not_found_sequence()` to add new items and `item_found_sequence()` to log updates to existing items.
+        - Autosave is automatically triggered within the respective sequences to minimize data loss risks.
     """
     while True:
         upc = get_user_upc_input()  # Step 1: Get the UPC from the user
@@ -259,5 +284,5 @@ def item_found_sequence(df, description, upc, price, user_identity, current_bin)
 
     print() # Step 6: Display the last few rows of the updated inventory as confirmation
     print(df.tail())
-    
+
     return None
