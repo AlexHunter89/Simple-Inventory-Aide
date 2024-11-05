@@ -15,102 +15,101 @@ Thank you all for your patience during this refactoring process! The code is bac
 
 ## Overview
 
-This Inventory Tracking System is a command-line Python application designed to manage inventory by scanning or manually entering UPC (Universal Product Code) numbers. The program helps users track item descriptions, prices, and quantities. If an item is already present in the inventory, the user can simply update the quantity. If the item is new, the system will prompt the user to provide additional details, such as a description and price. This software is perfect for small-scale inventory management where simple text-based tracking is sufficient.
-
-The program also includes various menu options that allow users to start a new session, load previous inventory data, modify entries, or switch between different storage bins.
+Welcome to the Inventory Tracking System! This Python-based text interface program helps users track and manage inventory items using Universal Product Codes (UPCs). Users can scan or enter UPCs, manage item details, and organize items into bins for better categorization. Whether you're starting fresh or continuing from a previous inventory session, this system is designed to make inventory management smooth and straightforward.
 
 ## Features
-- **User Authentication:** Users are identified by their name and employee number.
-- **Inventory Management:** The program tracks items by UPC, allowing the user to add new items or update existing items.
-- **Data Persistence:** Inventory data is saved automatically and periodically to avoid data loss.
-- **Bin Management:** Users can organize inventory into different storage bins and switch bins as needed.
-- **Autosave Functionality:** The program automatically saves data after every five entries, ensuring up-to-date records.
 
-## Installation
+- **User Identification**: Each session begins by greeting the user and identifying them by name and employee number. For example, you will be prompted to enter your name and your employee number, and then see a message like 'Welcome: John Doe, Employee #1234'. Each session begins by greeting the user and identifying them by name and employee number.
+- **UPC Scanning and Item Management**: Enter UPCs to check if items are already recorded. If an item exists, simply add a quantity. If not, enter item details such as description and price.
+- **Multiple Bins**: Organize items into different inventory bins for better categorization.
+- **Autosave Functionality**: Inventory data is saved automatically after a set number of entries to prevent data loss. Users do not need to manually save their work, as the autosave feature ensures that all changes are regularly backed up.
 
-Before you start using the program, make sure you have Python installed. You will also need to install the required dependencies listed in the `requirements.txt` file.
+## Requirements
 
-To install dependencies, run:
+To use the Inventory Tracking System, you will need to install the dependencies listed in `requirements.txt`.
+
+Install them by running:
 
 ```sh
 pip install -r requirements.txt
 ```
 
-The required libraries include:
-- **pandas** for data handling.
-- **rich** for enhanced console output.
-- **pyinputplus** for user prompts.
+## How to Use
 
-For more details, refer to the `requirements.txt` file.
+1. **Launch the Program**:
+   
+   Run the main script to start the program:
+   ```sh
+   python main.py
+   ```
 
-## How to Run
+2. **User Identification**:
+   
+   The system will greet you and ask for your name and employee number. This information is used to identify the user and is displayed during the session.
 
-To start the program, simply run the `main.py` file:
+3. **Main Menu Options**:
+
+   After user identification, you will see the following menu options, each designed to guide you through inventory management:
+
+   - **Start New Session (Not Recommended)**: Begins a new inventory session, which will overwrite any previous session data. You will need to confirm and provide an admin password to proceed.
+   - **Load Previous Session (Recommended)**: Loads the last saved inventory session, allowing you to continue where you left off.
+   - **Delete Entry (Coming Soon)**: Placeholder for a future feature to delete items from inventory.
+   - **Modify Entry (Coming Soon)**: Placeholder for a future feature to modify item details.
+   - **Change Current Bin**: Allows you to switch to a different inventory bin for better organization of items.
+   - **Exit**: Ends the session and closes the program.
+
+4. **Inventory Management**:
+   - **Entering UPCs**: You will be prompted to enter a UPC code. If the code is already in the inventory, you can add a quantity. If it's a new item, you will be asked to provide additional details.
+   - **Adding New Items**: If the UPC is not found, you'll be guided to enter the item description, price, and quantity. The data is recorded along with a timestamp and user details.
+   - **Changing Bins**: You can change the bin in which the item will be stored, allowing for more organized inventory management.
+
+5. **Autosave**:
+   
+   The system automatically saves inventory data every 5 entries. This ensures that all changes are consistently backed up without requiring manual intervention.
+
+## Data Persistence
+
+- **Inventory Data**: Inventory information is saved in an Excel file (`data/inventory.xlsx`). A detailed entry log is also saved as `data/entry_log.xlsx`. Please note that users may need to manually check and back up these files if additional data security is required. Inventory information is saved in an Excel file (`data/inventory.xlsx`). A detailed entry log is also saved as `data/entry_log.xlsx`.
+- **User Authentication**: Administrator actions (such as starting a new session) require a password, which is read from the file `data/admin.txt`. Please make sure this file exists and is correctly configured.
+
+## Handling Errors
+
+- **Module Imports**: Ensure all necessary modules (`pandas`, `rich`, `pyinputplus`) are installed. If any of these modules are missing, the program will prompt you to install them. If you encounter issues with module installation, try running the following command to install the required module:
+  ```sh
+  pip install module_name
+  ``` Ensure all necessary modules (`pandas`, `rich`, `pyinputplus`) are installed. If any of these modules are missing, the program will prompt you to install them.
+- **File Handling**: Make sure required data files (e.g., `inventory.xlsx`, `entry_log.xlsx`, `bin_variable.txt`, `admin.txt`) are available and accessible.
+
+## Dependencies
+
+This project uses the following Python libraries:
+
+- **pandas**: For handling data storage and manipulation.
+- **rich**: For improved console output.
+- **pyinputplus**: For user input handling with additional validation.
+
+All dependencies are listed in `requirements.txt`. Run the following command to install them:
 
 ```sh
-python main.py
+pip install -r requirements.txt
 ```
 
-Upon launching, the program will greet you and ask for your name and employee number. You will then be presented with a menu of options for managing the inventory.
+## Known Issues and Limitations
 
-## User Guide
-
-1. **Welcome and User Identification**
-   - The program starts by greeting the user and asking for their name and employee number to establish user identity.
-
-2. **Menu Options**
-   - **Start New Session (Not Recommended):** This option allows users to start a new inventory session from scratch. Please note that any existing data will be overwritten if a new session is started.
-   - **Load Previous Session (Recommended):** Loads the last saved inventory session, allowing you to continue managing items.
-   - **Delete Entry / Modify Entry:** Currently, these options are placeholders and will be implemented in future versions.
-   - **Change Current Bin:** Allows users to change the current bin they are working on, enabling easy categorization of inventory.
-   - **Exit:** Closes the program.
-
-3. **Adding Items to Inventory**
-   - After selecting either **Start New Session** or **Load Previous Session**, the user can enter UPC numbers.
-   - If the UPC exists, the program retrieves the item's previous description and price, and only asks for a quantity update.
-   - If the UPC is new, the user is prompted to enter the item's description and price, followed by quantity.
-
-4. **Managing Bins**
-   - Users can switch bins to track inventory separately in different locations or categories. When changing bins, the program updates the current bin being worked on.
-
-5. **Autosave Feature**
-   - The inventory data is automatically saved after every five entries to prevent data loss. The data is saved in two formats: session logs and inventory logs.
-
-## Data Files
-- **Inventory Data** is saved in an Excel file (`data/inventory.xlsx`), making it easy to load the previous inventory and continue where you left off.
-- **Session Logs** are also maintained to help with record-keeping.
-- **Bin Information** is saved in a text file (`data/bin_variable.txt`) to track which bin is currently in use.
-
-## Example Usage
-
-Here is a basic flow of how a user might interact with the system:
-
-1. Start the program by running `main.py`.
-2. Enter your name and employee number.
-3. Choose "Load Previous Session" to continue adding items.
-4. Enter a UPC code.
-   - If the item exists, enter the quantity to update.
-   - If the item is new, enter the description, price, and quantity.
-5. If you need to switch to another bin, select "Change Current Bin" from the main menu.
-6. When done, select "Exit" to quit the program.
-
-## Requirements
-The full list of required libraries is in the `requirements.txt` file, but the key dependencies are:
-- `pandas` for managing inventory data.
-- `rich` for pretty console output.
-- `pyinputplus` for robust user input handling.
-
-## Future Features
-- **Delete Entry** and **Modify Entry** functionalities are placeholders and will be added in future versions.
-- Improved item tracking and bin categorization will be implemented based on user feedback.
+- The **Delete Entry** and **Modify Entry** features are currently placeholders and will be implemented in future versions.
+- For the best experience, users are recommended to load a previous session rather than starting a new one, as starting a new session will overwrite all previous data.
 
 ## Contributing
-Contributions are welcome! If you would like to contribute to this project, please fork the repository and create a pull request. Bug reports and feature requests can be submitted via the Issues section.
+
+Contributions to enhance this system are welcome! Please fork the repository, make changes, and submit a pull request. Feel free to add new features, enhance existing functionality, or improve the user interface.
 
 ## License
-This project is licensed under the MIT License.
+
+This project is open-source and available under the MIT License.
+
+## Contact
+
+For any questions or issues, please open an issue on the repository or contact the maintainer directly.
 
 ---
-
-Feel free to reach out with any questions or suggestions to help improve the Inventory Tracking System. Your feedback is greatly appreciated!
-
+Thank you for using the Inventory Tracking System. We hope it makes managing your inventory easier and more efficient!
