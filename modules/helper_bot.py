@@ -71,6 +71,95 @@ def open_ai_helper_bot():
             if user_question == 'quit':
                 break
 
+            assistant = client.beta.assistants.create(
+                name="Inventory Help Bot",
+                instructions="You are a friendly and helpful assistant for the Inventory Tracking System. Users may come to you with questions about how to use the system or express confusion about certain features. While you have specialized knowledge about the program, feel free to interact with users about anything they wish to discuss. Your approach should be light-hearted and fun, making users feel like they're chatting with their best friend who just happens to be really smart. Use simple, clear language without dumbing things down. You have the tiniest bit of southern charm at times and at other times a bit of east coast grit. Give it personality but using unique phrases.",
+                model="gpt-3.5-turbo",
+                tools=[{"type": "file_search"}]
+            )
+
+            # Create a vector store caled "Financial Statements"
+            vector_store = client.beta.vector_stores.create(name="Inventory Docs")
+            
+            # Ready the files for upload to OpenAI
+            file_paths = ["readme.md", "main.py", "modules/data_manager.py", "modules/helper_bot.py", "modules/inventory.py", "modules/menu.py", "modules/user.py"]
+            file_streams = [open(path, "rb") for path in file_paths]
+            
+            # Use the upload and poll SDK helper to upload the files, add them to the vector store,
+            # and poll the status of the file batch for completion.
+            file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
+            vector_store_id=vector_store.id, files=file_streams
+            )
+            
+            # You can print the status and the file counts of the batch to see the result of this operation.
+            # print(file_batch.status)
+            # print(file_batch.file_counts)
+
+            assistant = client.beta.assistants.update(
+            assistant_id=assistant.id,
+            tool_resources={"file_search": {"vector_store_ids": [vector_store.id]}},
+            )
+            
+            # Create a thread and attach the file to the message
+            thread = client.beta.threads.create(
+            messages=[{
+                    "role": "user",
+                    "content": [
+                        {
+                        "type": "text",
+                        "text": user_question
+                        }
+                    ]
+                }])
+            
+            # The thread now has a vector store with that file in its tool resources.
+            print(thread.tool_resources.file_search)
+
+            from typing_extensions import override
+            from openai import AssistantEventHandler, OpenAI
+            
+            client = OpenAI()
+            
+            class EventHandler(AssistantEventHandler):
+                @override
+                def on_text_created(self, text) -> None:
+                    print(f"\nassistant > ", end="", flush=True)
+
+                @override
+                def on_tool_call_created(self, tool_call):
+                    print(f"\nassistant > {tool_call.type}\n", flush=True)
+
+                @override
+                def on_message_done(self, message) -> None:
+                    # print a citation to the file searched
+                    message_content = message.content[0].text
+                    annotations = message_content.annotations
+                    citations = []
+                    for index, annotation in enumerate(annotations):
+                        message_content.value = message_content.value.replace(
+                            annotation.text, f"[{index}]"
+                        )
+                        if file_citation := getattr(annotation, "file_citation", None):
+                            cited_file = client.files.retrieve(file_citation.file_id)
+                            citations.append(f"[{index}] {cited_file.filename}")
+
+                    print(message_content.value)
+                    print("\n".join(citations))
+
+
+            # Then, we use the stream SDK helper
+            # with the EventHandler class to create the Run
+            # and stream the response.
+
+            with client.beta.threads.runs.stream(
+                thread_id=thread.id,
+                assistant_id=assistant.id,
+                instructions="Please address the user as Jane Doe. The user has a premium account.",
+                event_handler=EventHandler(),
+            ) as stream:
+                stream.until_done()
+
+            """
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
@@ -102,7 +191,7 @@ def open_ai_helper_bot():
                 }
                 )
 
-            print(f"[blue]{response.choices[0].message.content}[/blue]")
+            print(f"[blue]{response.choices[0].message.content}[/blue]")"""
 
         return True
     return True
