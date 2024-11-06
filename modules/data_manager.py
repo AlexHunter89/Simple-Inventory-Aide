@@ -32,9 +32,30 @@ key_file_path = Path(r"C:\Users\alexj\Documents\open_ai\key_1.txt")
 autosave_interval = 5
 
 def open_ai_key_reader():
-    with open(key_file_path, 'r') as file:
-        key = file.read()
-    return key
+    """
+    Checks for the existence of 'key_1.txt' and reads its value.
+
+    If 'key_1.txt' exists, reads the content and uses it as the Open AI API Key.
+    If the file does not exist or contains invalid content,
+    it prints a message to the user and returns None.
+
+    Parameters:
+        None
+    
+    Returns:
+        str: The Open AI API Key, which was stored in a text file.
+        None: None: If the file is not found or an error occurs while reading the file.
+
+    Notes:
+        The Open AI API Key text file is not provided in the GitHub repository.
+        You will need to get your own API key and manage the key access in your own unique way.
+    """
+    try:
+        with open(key_file_path, 'r') as file:
+            return  file.read().strip()
+    except FileNotFoundError:
+        print(f"[red]Error: {key_file_path}' not found.[/red]")
+        return None
 
 def bin_variable_file_handler():
     """
