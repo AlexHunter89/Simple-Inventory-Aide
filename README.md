@@ -38,6 +38,7 @@ Welcome to the Inventory Tracking System! This Python-based text interface progr
 - **UPC Scanning and Item Management**: Enter UPCs to check if items are already recorded. If an item exists, simply add a quantity. If not, enter item details such as description and price.
 - **Multiple Bins**: Organize items into different inventory bins for better categorization.
 - **Autosave Functionality**: Inventory data is saved automatically after a set number of entries to prevent data loss. Users do not need to manually save their work, as the autosave feature ensures that all changes are regularly backed up.
+- **AI Powered Help Bot**: A chat bot that can assist you with your questions about the inventory tracking system.
 
 ## Requirements
 
@@ -79,6 +80,7 @@ pip install -r requirements.txt
    - **Modify Entry (Coming Soon)**: Placeholder for a future feature to modify item details.
    - **Change Current Bin**: Allows you to switch to a different inventory bin for better organization of items.
    - **Exit**: Ends the session and closes the program.
+   - **AI Helpbot (Bonus)**: Activates the chat bot assistant.
 
 5. **Inventory Management**:
    - **Entering UPCs**: You will be prompted to enter a UPC code. If the code is already in the inventory, you can add a quantity. If it's a new item, you will be asked to provide additional details.
@@ -100,7 +102,7 @@ pip install -r requirements.txt
   ```sh
   pip install module_name
   ``` Ensure all necessary modules (`pandas`, `rich`, `pyinputplus`, 'openai') are installed. If any of these modules are missing, the program will prompt you to install them.
-- **File Handling**: Make sure required data files (e.g., `inventory.xlsx`, `entry_log.xlsx`, `bin_variable.txt`, `admin.txt`) are available and accessible.
+- **File Handling**: Make sure required data files (e.g., `inventory.xlsx`, `entry_log.xlsx`, `bin_variable.txt`, `admin.txt`, `key_1.txt`) are available and accessible.
 
 ## Dependencies
 
@@ -121,6 +123,7 @@ pip install -r requirements.txt
 
 - The **Delete Entry** and **Modify Entry** features are currently placeholders and will be implemented in future versions.
 - For the best experience, users are recommended to load a previous session rather than starting a new one, as starting a new session will overwrite all previous data.
+- The chat bot requires an Open AI API Key!! This feature will be broken without the proper configuration on behalf of the user.
 
 ## Contributing
 
