@@ -44,7 +44,7 @@ def open_ai_key_reader():
     
     Returns:
         str: The Open AI API Key, which was stored in a text file.
-        None: None: If the file is not found or an error occurs while reading the file.
+        True: If the file is not found or an error occurs while reading the file.
 
     Notes:
         The Open AI API Key text file is not provided in the GitHub repository.
