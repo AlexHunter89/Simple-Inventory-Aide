@@ -28,8 +28,31 @@ log_file_path = Path(r"data\entry_log.xlsx")
 bin_variable_file_path = Path(r"data\bin_variable.txt")
 password_file_path = Path(r"data\admin.txt")
 key_file_path = Path(r"C:\Users\alexj\Documents\open_ai\key_1.txt")
+open_ai_assistant_path = Path(r"C:\Users\alexj\Documents\open_ai\assistant_prompt.txt")
 
 autosave_interval = 5
+
+def read_assistant_prompt():
+    """
+    Reads the assistant prompt for Chat GPT from an external text file.
+
+    This function attempts to read the assistant prompt from a file specified by `open_ai_assistant_path`. 
+    The prompt is returned as a string after stripping any leading or trailing whitespace. If the file 
+    cannot be found, an error message is printed, and None is returned.
+
+    Parameters:
+        None
+
+    Returns:
+        str: The prompt read from the file, with any extra whitespace removed.
+        None: If the file is not found or an error occurs while reading the file.
+    """
+    try:
+        with open(open_ai_assistant_path, 'r') as file:
+            return file.read().strip()
+    except FileNotFoundError:
+        print(f"[red]Error: Prompt file '{open_ai_assistant_path}' not found.[/red]")
+        return None
 
 def open_ai_key_reader():
     """
