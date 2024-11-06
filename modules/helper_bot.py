@@ -1,6 +1,5 @@
 from modules.data_manager import open_ai_key_reader
-from modules.user import chat_gpt_loop
-from pathlib import Path
+from modules.user import chat_gpt_question_prompt
 
 try:
     from rich import print
@@ -26,15 +25,23 @@ except ImportError:
 
 def open_ai_helper_bot():
     key = open_ai_key_reader()
-    client = OpenAI(api_key=key)
 
-    welcome_to_help_prompt = "\nWelcome to the AI help system. Please ask it anything you would like."
-    print(welcome_to_help_prompt)
+    if key != None:
+        client = OpenAI(api_key=key)    # Finds the API key
+
+        # Greets the user and explains the expected interactions
+        print("""
+              Welcome to the AI help system.
+              
+              This bot is built to assistant you in using the inventory tracking system.
+              However, it is a general use chat bot and it will technically converse about anything.
+              Feel free to ask the bot about whatever comes to your mind!
+              """)
 
 
 
     while True:
-        user_question = chat_gpt_loop()
+        user_question = chat_gpt_question_prompt()
 
         if user_question == 'quit':
             break
