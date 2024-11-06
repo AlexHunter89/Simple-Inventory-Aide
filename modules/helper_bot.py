@@ -118,7 +118,7 @@ def open_ai_helper_bot():
             from typing_extensions import override
             from openai import AssistantEventHandler, OpenAI
             
-            client = OpenAI()
+            client = OpenAI(api_key=key)
             
             class EventHandler(AssistantEventHandler):
                 @override
