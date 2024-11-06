@@ -13,7 +13,7 @@ This refactor not only fixes existing bugs but also provides a solid foundation 
 
 #### BONUS!
 
-You will also see a special menu option that is not yet fully covered in the guide below. I will update it further soon.
+A special menu option is now available. Call on the power of AI for help in using the inventory system!
 
 This feature will be broken without an Open AI API key and without installing openai through pip for Python.
 
