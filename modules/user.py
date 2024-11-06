@@ -15,7 +15,16 @@ except ImportError:
     print("Please install it by running: python -m pip install rich")
     exit(1)
 
-def chat_gpt_question_loop():
+def chat_gpt_question_prompt():
+    """
+    Prompts the user to ask a question or type quit to exit.
+
+    A prompt will appear asking the user what they need help with.
+    The user can respond with anything they would like.
+
+    Returns:
+        str: A string that contains the user's question in a variable labeled 'user_question'.  
+    """
     question_prompt = "\nWhat can I help you with? (Type 'quit' to go back to the main menu)\n"
     user_question = pyip.inputStr(prompt=question_prompt)
     print()
