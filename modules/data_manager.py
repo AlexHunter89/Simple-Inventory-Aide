@@ -28,7 +28,7 @@ log_file_path = Path(r"data\entry_log.xlsx")
 bin_variable_file_path = Path(r"data\bin_variable.txt")
 password_file_path = Path(r"data\admin.txt")
 key_file_path = Path(r"C:\Users\alexj\Documents\open_ai\key_1.txt")
-open_ai_assistant_path = Path(r"C:\Users\alexj\Documents\open_ai\assistant_prompt.txt")
+open_ai_assistant_path = Path(r"C:\Users\alexj\Documents\open_ai\inventory_assistant_prompt.txt")
 
 autosave_interval = 5
 
