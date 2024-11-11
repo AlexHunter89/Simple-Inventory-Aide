@@ -51,8 +51,12 @@ def open_ai_helper_bot():
     key = open_ai_key_reader()
     system_prompt = read_assistant_prompt()
 
-    if key != None:
+    if key != None and system_prompt != None:
         client = OpenAI(api_key=key)    # Finds the API key
+
+        my_assistant = client.beta.assistants.retrieve("asst_NsayxGuGdjuf6qgOJRs8ZmHX")
+
+        thread = client.beta.threads.create()
 
         # Greets the user and explains the expected interactions
         print("""
@@ -71,38 +75,49 @@ def open_ai_helper_bot():
             if user_question == 'quit':
                 break
 
-            response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {
-                    "role": "system",
-                    "content": [
-                        {
-                        "type": "text",
-                        "text": system_prompt
-                        }
-                    ]
-                    },
-                    {
-                    "role": "user",
-                    "content": [
-                        {
-                        "type": "text",
-                        "text": user_question
-                        }
-                    ]
-                }],
-                temperature=1,
-                max_tokens=2048,
-                top_p=1,
-                frequency_penalty=0,
-                presence_penalty=0,
-                response_format={
-                    "type": "text"
-                }
-                )
+            message = client.beta.threads.messages.create(
+                thread_id=thread.id,
+                role="user",
+                content=user_question
+            )
 
-            print(f"[blue]{response.choices[0].message.content}[/blue]")
-
+            from typing_extensions import override
+            from openai import AssistantEventHandler
+ 
+            # First, we create a EventHandler class to define
+            # how we want to handle the events in the response stream.
+ 
+            class EventHandler(AssistantEventHandler):
+                @override
+                def on_text_created(self, text) -> None:
+                    print(f"\nassistant > ", end="", flush=True)
+                    
+                @override
+                def on_text_delta(self, delta, snapshot):
+                    print(delta.value, end="", flush=True)
+                
+                def on_tool_call_created(self, tool_call):
+                    print(f"\nassistant > {tool_call.type}\n", flush=True)
+                
+                def on_tool_call_delta(self, delta, snapshot):
+                    if delta.type == 'code_interpreter':
+                        if delta.code_interpreter.input:
+                            print(delta.code_interpreter.input, end="", flush=True)
+                        if delta.code_interpreter.outputs:
+                            print(f"\n\noutput >", flush=True)
+                            for output in delta.code_interpreter.outputs:
+                                if output.type == "logs":
+                                    print(f"\n{output.logs}", flush=True)
+ 
+            # Then, we use the `stream` SDK helper 
+            # with the `EventHandler` class to create the Run 
+            # and stream the response.
+ 
+            with client.beta.threads.runs.stream(
+                thread_id=thread.id,
+                assistant_id=my_assistant.id,
+                event_handler=EventHandler(),
+                ) as stream:
+                    stream.until_done()
+    else:
         return True
-    return True
