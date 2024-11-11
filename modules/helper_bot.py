@@ -116,6 +116,7 @@ def open_ai_helper_bot():
             with client.beta.threads.runs.stream(
                 thread_id=thread.id,
                 assistant_id=my_assistant.id,
+                instructions=system_prompt,
                 event_handler=EventHandler(),
                 ) as stream:
                     stream.until_done()
